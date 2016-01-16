@@ -1,7 +1,7 @@
 {
-  "name": "OpenShift-Sample-App",
+  "name": "WebDevelopment",
   "version": "1.0.0",
-  "description": "OpenShift Sample Application",
+  "description": "Web Development CS5610",
   "keywords": [
     "OpenShift",
     "Node.js",
@@ -9,8 +9,8 @@
     "openshift"
   ],
   "author": {
-    "name": "OpenShift",
-    "email": "ramr@example.org",
+    "name": "Sudeep",
+    "email": "kulkarni.su@husky.neu.edu",
     "url": "http://www.openshift.com/"
   },
   "homepage": "http://www.openshift.com/",
