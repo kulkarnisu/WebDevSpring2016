@@ -1,3 +1,7 @@
-#pageTitle {
+.pageTitle {
     font-size: 20px;
+}
+
+.form-group{
+    margin-bottom: 30px;
 }
