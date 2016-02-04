@@ -5,3 +5,11 @@
 .form-group{
     margin-bottom: 30px;
 }
+
+.glyphicon-big {
+    font-size: 2em;
+}
+
+table>tbody>tr>td.no-padding{
+    padding: 0px;
+}
