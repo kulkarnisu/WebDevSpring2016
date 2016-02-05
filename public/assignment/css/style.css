@@ -29,3 +29,12 @@ table.thick-top-border{
 .right-align-cell{
     text-align: right;
 }
+#my-form{
+    margin: 10px 0 0 10px;
+}
+#my-form span.glyphicon {
+    font-size: 2em;
+}
+#my-form>.row>div:nth-child(2) {
+    margin-top: 20px;
+}

@@ -66,63 +66,66 @@
             <div class="container">
                 <div class="row" id="forms-container">
                     <ul class="nav nav-tabs" id="my-nav">
-                        <li class="active" role="presentation">
-                            <a href="#">Forms</a>
-                        </li>
                         <li role="presentation">
-                            <a href="fields.html">Fields</a>
+                            <a href="forms.html">Forms</a>
+                        </li>
+                        <li class="active" role="presentation">
+                            <a href="#">Fields</a>
                         </li>
                     </ul>
-                    <div class="table-responsive">
-                        <table class="table table-bordered table-hover thick-top-border">
-                            <thead>
-                            <tr>
-                                <th>
-                                    <span class="glyphicon glyphicon-triangle-bottom hover"></span>
-                                    Form Name
-                                </th>
-                                <th>
-                                    <span class="glyphicon glyphicon-triangle-bottom hover"></span>
-                                    Action
-                                </th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr>
-                                <td class="col-md-10"><input type="text" placeholder="Name" class="form-control"></td>
-                                <td class="col-md-2 right-align-cell">
-                                    <span class="glyphicon glyphicon-plus glyphicon-big hover"></span>
-                                    <span>&nbsp;&nbsp;</span>
-                                    <span class="glyphicon glyphicon-ok glyphicon-big hover"></span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Registration Form</td>
-                                <td class="right-align-cell">
-                                    <span class="glyphicon glyphicon-remove glyphicon-big hover"></span>
-                                    <span>&nbsp;&nbsp;</span>
-                                    <span class="glyphicon glyphicon-pencil glyphicon-big hover"></span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Contact List</td>
-                                <td class="right-align-cell">
-                                    <span class="glyphicon glyphicon-remove glyphicon-big hover"></span>
-                                    <span>&nbsp;&nbsp;</span>
-                                    <span class="glyphicon glyphicon-pencil glyphicon-big hover"></span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>To Do List</td>
-                                <td class="right-align-cell">
-                                    <span class="glyphicon glyphicon-remove glyphicon-big hover"></span>
-                                    <span>&nbsp;&nbsp;</span>
-                                    <span class="glyphicon glyphicon-pencil glyphicon-big hover"></span>
-                                </td>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </div>
+                    <form action="" id="my-form">
+                        <div class="row">
+                            <div class="form-group col-md-8">
+                                <label for="fname">First Name:</label>
+                                <input type="text" class="form-control" placeholder="First Name" id="fname">
+                            </div>
+                            <div class="col-md-4 text-center">
+                                <span class="glyphicon glyphicon-pencil"></span>
+                                <span class="glyphicon glyphicon-plus"></span>
+                                <span class="glyphicon glyphicon-remove"></span>
+                                <span class="glyphicon glyphicon-align-justify"></span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-md-8">
+                                <label for="lname">Last Name:</label>
+                                <input type="text" class="form-control" placeholder="Last Name" id="lname">
+                            </div>
+                            <div class="col-md-4 text-center">
+                                <span class="glyphicon glyphicon-pencil"></span>
+                                <span class="glyphicon glyphicon-plus"></span>
+                                <span class="glyphicon glyphicon-remove"></span>
+                                <span class="glyphicon glyphicon-align-justify"></span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-md-8">
+                                <label for="dob">Date of Birth:</label>
+                                <input type="date" class="form-control" placeholder="Select Date" id="dob">
+                            </div>
+                            <div class="col-md-4 text-center">
+                                <span class="glyphicon glyphicon-pencil"></span>
+                                <span class="glyphicon glyphicon-plus"></span>
+                                <span class="glyphicon glyphicon-remove"></span>
+                                <span class="glyphicon glyphicon-align-justify"></span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-md-8">
+                                <label for="gender">Gender:</label>
+                                <select name="Gender" id="gender" class="form-control">
+                                    <option value="Male">Male</option>
+                                    <option value="Female">Female</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4 text-center">
+                                <span class="glyphicon glyphicon-pencil"></span>
+                                <span class="glyphicon glyphicon-plus"></span>
+                                <span class="glyphicon glyphicon-remove"></span>
+                                <span class="glyphicon glyphicon-align-justify"></span>
+                            </div>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
