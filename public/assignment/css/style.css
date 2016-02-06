@@ -45,3 +45,6 @@ table.thick-top-border{
 .not-visible{
     visibility: hidden;
 }
+.nav-tabs{
+    border-bottom:none;
+}
