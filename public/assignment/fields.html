@@ -32,8 +32,8 @@
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="register.html">Register</a></li>
                 <li><a href="login.html">Login</a></li>
-                <li><a href="#">Username</a></li>
-                <li><a href="#">Logout</a></li>
+                <li><a href="profile.html">Username</a></li>
+                <li><a href="home.html">Logout</a></li>
             </ul>
         </div>
     </div>
@@ -80,10 +80,10 @@
                                 <input type="text" class="form-control" placeholder="First Name" id="fname">
                             </div>
                             <div class="col-md-4 text-center">
-                                <span class="glyphicon glyphicon-pencil"></span>
-                                <span class="glyphicon glyphicon-plus"></span>
-                                <span class="glyphicon glyphicon-remove"></span>
-                                <span class="glyphicon glyphicon-align-justify"></span>
+                                <span class="glyphicon glyphicon-pencil hover"></span>
+                                <span class="glyphicon glyphicon-plus hover"></span>
+                                <span class="glyphicon glyphicon-remove hover"></span>
+                                <span class="glyphicon glyphicon-align-justify hover"></span>
                             </div>
                         </div>
                         <div class="row">
@@ -92,10 +92,10 @@
                                 <input type="text" class="form-control" placeholder="Last Name" id="lname">
                             </div>
                             <div class="col-md-4 text-center">
-                                <span class="glyphicon glyphicon-pencil"></span>
-                                <span class="glyphicon glyphicon-plus"></span>
-                                <span class="glyphicon glyphicon-remove"></span>
-                                <span class="glyphicon glyphicon-align-justify"></span>
+                                <span class="glyphicon glyphicon-pencil hover"></span>
+                                <span class="glyphicon glyphicon-plus hover"></span>
+                                <span class="glyphicon glyphicon-remove hover"></span>
+                                <span class="glyphicon glyphicon-align-justify hover"></span>
                             </div>
                         </div>
                         <div class="row">
@@ -104,10 +104,10 @@
                                 <input type="date" class="form-control" placeholder="Select Date" id="dob">
                             </div>
                             <div class="col-md-4 text-center">
-                                <span class="glyphicon glyphicon-pencil"></span>
-                                <span class="glyphicon glyphicon-plus"></span>
-                                <span class="glyphicon glyphicon-remove"></span>
-                                <span class="glyphicon glyphicon-align-justify"></span>
+                                <span class="glyphicon glyphicon-pencil hover"></span>
+                                <span class="glyphicon glyphicon-plus hover"></span>
+                                <span class="glyphicon glyphicon-remove hover"></span>
+                                <span class="glyphicon glyphicon-align-justify hover"></span>
                             </div>
                         </div>
                         <div class="row">
@@ -119,17 +119,17 @@
                                 </select>
                             </div>
                             <div class="col-md-4 text-center">
-                                <span class="glyphicon glyphicon-pencil"></span>
-                                <span class="glyphicon glyphicon-plus"></span>
-                                <span class="glyphicon glyphicon-remove"></span>
-                                <span class="glyphicon glyphicon-align-justify"></span>
+                                <span class="glyphicon glyphicon-pencil hover"></span>
+                                <span class="glyphicon glyphicon-plus hover"></span>
+                                <span class="glyphicon glyphicon-remove hover"></span>
+                                <span class="glyphicon glyphicon-align-justify hover"></span>
                             </div>
                         </div>
                         <div class="row">
                             <div class="form-group col-md-8">
                                 <label>Roles:</label>
                                 <div class="checkbox">
-                                    <label><input type="checkbox" value="Admin">Admin</label>
+                                    <label><input type="checkbox" value="Admin" checked>Admin</label>
                                 </div>
                                 <div class="checkbox">
                                     <label><input type="checkbox" value="Student">Student</label>
@@ -139,30 +139,44 @@
                                 </div>
                             </div>
                             <div class="col-md-4 text-center">
-                                <span class="glyphicon glyphicon-pencil"></span>
-                                <span class="glyphicon glyphicon-plus"></span>
-                                <span class="glyphicon glyphicon-remove"></span>
-                                <span class="glyphicon glyphicon-align-justify"></span>
+                                <span class="glyphicon glyphicon-pencil hover"></span>
+                                <span class="glyphicon glyphicon-plus hover"></span>
+                                <span class="glyphicon glyphicon-remove hover"></span>
+                                <span class="glyphicon glyphicon-align-justify hover"></span>
                             </div>
                         </div>
                         <div class="row">
-                            <div class="form-group col-md-8">
+                            <div class="form-group col-md-8 no-bottom-margin">
                                 <label>License Agreement:</label>
                                 <div class="radio">
-                                    <label><input type="radio" name="license" value="Yes">Yes</label>
+                                    <label><input type="radio" name="license" value="Yes" checked>Yes</label>
                                 </div>
                                 <div class="radio">
                                     <label><input type="radio" name="license" value="No">No</label>
                                 </div>
                             </div>
                             <div class="col-md-4 text-center">
-                                <span class="glyphicon glyphicon-pencil"></span>
-                                <span class="glyphicon glyphicon-plus"></span>
-                                <span class="glyphicon glyphicon-remove"></span>
-                                <span class="glyphicon glyphicon-align-justify"></span>
+                                <span class="glyphicon glyphicon-pencil hover"></span>
+                                <span class="glyphicon glyphicon-plus hover"></span>
+                                <span class="glyphicon glyphicon-remove hover"></span>
+                                <span class="glyphicon glyphicon-align-justify hover"></span>
                             </div>
                         </div>
                         <hr>
+                        <div class="row">
+                            <div class="form-group col-md-8 no-bottom-margin">
+                                <label>Add new field:</label>
+                                <select name="new-field" id="new-field" class="form-control">
+                                    <option value="sline-txt">Single Line text</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4 text-center">
+                                <span class="glyphicon glyphicon-pencil hover not-visible"></span>
+                                <span class="glyphicon glyphicon-plus hover"></span>
+                                <span class="glyphicon glyphicon-remove hover not-visible"></span>
+                                <span class="glyphicon glyphicon-align-justify hover not-visible"></span>
+                            </div>
+                        </div>
                     </form>
                 </div>
             </div>
