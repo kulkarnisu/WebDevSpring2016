@@ -42,13 +42,13 @@
 
                         var $tr = $("<tr>")
                             .attr("id", imdb)
-                            .click(function() {
+                            .click(function () {
                                 var imdb = $(this).attr("id");
                                 var url = DETAILS_URL.replace("IMDBID", imdb);
 
                                 $.ajax({
-                                   url: url,
-                                    success: function(data) {
+                                    url: url,
+                                    success: function (data) {
                                         var actors = data.Actors;
                                         var title = data.Title;
                                         var director = data.Director;
@@ -63,7 +63,7 @@
                                         $actors.empty();
 
                                         var actorArray = actors.split(",");
-                                        for(var a in actorArray) {
+                                        for (var a in actorArray) {
                                             var actor = actorArray[a];
                                             $li = $("<li>").append(actor).appendTo($actors);
                                         }

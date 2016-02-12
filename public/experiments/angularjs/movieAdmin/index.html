@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="MovieAdminApp">
+<head>
+    <meta charset="UTF-8">
+    <title>Movie Admin</title>
+    <!-- Bootstrap core CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div class="container">
+
+    <h1>Movie Admin</h1>
+
+    <div ng-controller = "MovieController" class="table-responsive">
+
+        <table class="table table-bodered table-striped">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Title</th>
+                <th>Director</th>
+                <th>&nbsp;</th>
+            </tr>
+            <tr>
+                <td><input type="text" class="form-control" ng-model="movie.id"></td>
+                <td><input type="text" class="form-control" ng-model="movie.title"></td>
+                <td><input type="text" class="form-control" ng-model="movie.director"></td>
+                <td>
+                    <button class="btn btn-success" ng-click="addMovie(movie)">Add</button>
+                    <button class="btn btn-info" ng-click="updateMovie(movie)">Update</button>
+                </td>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="movie in movies">
+                <td>{{movie.id}}</td>
+                <td>{{movie.title}}</td>
+                <td>{{movie.director}}</td>
+                <td>
+                    <button class="btn btn-danger" ng-click="deleteMovie(movie)">Delete</button>
+                    <button class="btn btn-info" ng-click="selectMovie(movie)">Select</button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+</div>
+<!--AngularJS-->
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.min.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
