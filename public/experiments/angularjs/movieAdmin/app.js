@@ -19,8 +19,7 @@
         $scope.selectMovie = selectMovie;
         $scope.updateMovie = updateMovie;
 
-        //Event Handler Implementationss
-
+        //Event Handler Implementations
         function addMovie(movie) {
              var newMovie = {
                  id: movie.id,
