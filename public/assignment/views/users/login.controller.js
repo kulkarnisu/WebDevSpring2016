@@ -8,7 +8,20 @@
         .module("FormBuilderApp")
         .controller("LoginController", LoginController);
 
-    function LoginController($scope) {
+    function LoginController($scope, $rootScope, UserService, $location) {
+        $scope.login = login;
 
+        function login(user) {
+            console.log(user);
+            UserService.findUserByUsernameAndPassword(user.username, user.password, isUserPresent);
+        }
+
+        function isUserPresent(userFound) {
+            console.log("Found user: " + userFound);
+            if(userFound) {
+                $rootScope.currentUser = userFound;
+                $location.url("/profile");
+            }
+        }
     }
 })();
