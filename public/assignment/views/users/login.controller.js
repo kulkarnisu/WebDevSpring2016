@@ -17,7 +17,6 @@
         }
 
         function isUserPresent(userFound) {
-            console.log("Found user: " + userFound);
             if(userFound) {
                 $rootScope.currentUser = userFound;
                 $location.url("/profile");

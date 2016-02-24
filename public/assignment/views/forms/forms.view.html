@@ -1,4 +1,4 @@
-<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2">
+<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2" ng-controller="FormsController">
     <h1 class="page-header">Forms</h1>
     <h2>Users</h2>
     <div class="container">
@@ -27,19 +27,30 @@
                     </thead>
                     <tbody>
                     <tr>
-                        <td class="col-md-10"><input type="text" placeholder="Name" class="form-control"></td>
+                        <td class="col-md-10">
+                            <input type="text" placeholder="Name" class="form-control" ng-model="form.title">
+                        </td>
                         <td class="col-md-2 right-align-cell">
-                            <span class="glyphicon glyphicon-plus glyphicon-big hover"></span>
+                            <span class="glyphicon glyphicon-plus glyphicon-big hover"
+                                  ng-click="addForm(form)"></span>
                             <span>&nbsp;&nbsp;</span>
-                            <span class="glyphicon glyphicon-ok glyphicon-big hover"></span>
+                            <span class="glyphicon glyphicon-ok glyphicon-big hover" ng-click="updateForm(form)"></span>
                         </td>
                     </tr>
-                    <tr>
+                    <tr ng-repeat="form in forms">
+                        <td>{{form.title}}</td>
+                        <td class="right-align-cell">
+                            <span class="glyphicon glyphicon-remove glyphicon-big hover" ng-click="deleteForm($index)"></span>
+                            <span>&nbsp;&nbsp;</span>
+                            <span class="glyphicon glyphicon-pencil glyphicon-big hover" ng-click="selectForm($index)"></span>
+                        </td>
+                    </tr>
+                    <!--<tr>
                         <td>Registration Form</td>
                         <td class="right-align-cell">
                             <span class="glyphicon glyphicon-remove glyphicon-big hover"></span>
                             <span>&nbsp;&nbsp;</span>
-                            <span class="glyphicon glyphicon-pencil glyphicon-big hover"></span>
+                            <span class="glyphicon glyphicon-pencil glyphicon-big hover" ng-click="updateForm(form)"></span>
                         </td>
                     </tr>
                     <tr>
@@ -57,7 +68,7 @@
                             <span>&nbsp;&nbsp;</span>
                             <span class="glyphicon glyphicon-pencil glyphicon-big hover"></span>
                         </td>
-                    </tr>
+                    </tr>-->
                     </tbody>
                 </table>
             </div>
