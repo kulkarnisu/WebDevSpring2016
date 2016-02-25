@@ -8,7 +8,11 @@
         .module("FormBuilderApp")
         .controller("FormsController", FormsController);
 
-    function FormsController($scope, $rootScope, FormService) {
+    function FormsController($scope, $rootScope, FormService, $location) {
+
+        if (!$rootScope.currentUser) {
+            $location.url("/home");
+        }
 
         //Event handler declarations
         $scope.addForm = addForm;

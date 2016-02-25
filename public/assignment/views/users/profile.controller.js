@@ -8,7 +8,10 @@
         .module("FormBuilderApp")
         .controller("ProfileController", ProfileController);
 
-    function ProfileController($scope, $rootScope, UserService) {
+    function ProfileController($scope, $rootScope, UserService, $location) {
+        if (!$rootScope.currentUser) {
+            $location.url("/home");
+        }
         $scope.user= {};
         $scope.user.username = $rootScope.currentUser.username;
         $scope.user.password = $rootScope.currentUser.password;
