@@ -12,7 +12,6 @@
         $scope.login = login;
 
         function login(user) {
-            console.log(user);
             UserService.findUserByUsernameAndPassword(user.username, user.password, isUserPresent);
         }
 
