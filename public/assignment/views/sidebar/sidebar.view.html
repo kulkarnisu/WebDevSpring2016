@@ -1,25 +1,32 @@
 <div class="col-sm-3 col-md-2 sidebar">
+
     <ul class="nav nav-sidebar">
+
         <li ng-class="{'active': $location.url() == '/home'}">
             <a href="#/home">
                 <span class="glyphicon glyphicon-home" aria-hidden="true"></span>
                 Home
                 <span class="sr-only">(current)</span></a>
         </li>
+
         <li ng-class="{'active': $location.url() == '/profile'}">
             <a href="#/profile">
             <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
             Profile</a>
         </li>
+
         <li ng-class="{'active': $location.url() == '/admin'}">
             <a href="#/admin">
             <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
             Admin</a>
         </li>
+
         <li ng-class="{'active': $location.url() == '/forms'}">
             <a href="#/forms">
             <span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>
             Forms</a>
         </li>
+
     </ul>
+
 </div>

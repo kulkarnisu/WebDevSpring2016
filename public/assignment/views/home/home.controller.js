@@ -8,7 +8,7 @@
         .module("FormBuilderApp")
         .controller("HomeController", HomeController);
 
-    function HomeController($scope) {
-
+    function HomeController($scope, $rootScope) {
+        $rootScope.currentUser = {}
     }
 })();
