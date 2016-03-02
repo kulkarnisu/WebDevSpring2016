@@ -8,8 +8,12 @@
         .module("FormBuilderApp")
         .controller("HeaderController", HeaderController);
 
-    function HeaderController($scope) {
+    function HeaderController($scope, $rootScope) {
+        $scope.logOut = logOut();
 
+        function logOut() {
+            $rootScope.currentUser = null;
+        }
     }
 })();
 
