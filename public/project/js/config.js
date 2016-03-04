@@ -12,10 +12,6 @@
                 templateUrl: "views/home/home.view.html",
                 controller: "HomeController"
             })
-            .when("/profile", {
-                templateUrl: "views/users/profile.view.html",
-                controller: "ProfileController"
-            })
             .when("/login", {
                 templateUrl: "views/users/login.view.html",
                 controller: "LoginController"
@@ -23,10 +19,6 @@
             .when("/register", {
                 templateUrl: "views/users/register.view.html",
                 controller: "RegController"
-            })
-            .when("/admin", {
-                templateUrl: "views/admin/admin.view.html",
-                controller: "AdminController"
             })
             .when("/connections", {
                 templateUrl: "views/connections/connections.view.html",
@@ -39,6 +31,10 @@
             .when("/documents/:id", {
                 templateUrl: "views/documents/documents.view.html",
                 controller: "DocumentsController"
+            })
+            .when("/data/:id", {
+                templateUrl: "views/data/data.view.html",
+                controller: "DataController"
             })
             .otherwise({
                 redirectTo: "/home",

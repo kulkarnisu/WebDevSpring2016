@@ -11,12 +11,19 @@
     var documents = [
         {
             _id: 212,
-            name: "MyDoc",
-            collectionId: 12143},
+            name: "Avatar",
+            collectionId: 12143,
+            movieName: "Avatar",
+            director: "James Cameron",
+            year: 2000
+        },
         {
             _id: 213,
             name: "MyDoc2",
-            collectionId: 12144
+            collectionId: 12144,
+            movieName: "Deadpool",
+            director: "Ryan Reynolds",
+            year: 2016
         }
     ];
 
@@ -26,7 +33,10 @@
             createDocumentForCollection: createDocumentForCollection,
             findAllDocumentsForCollection: findAllDocumentsForCollection,
             deleteDocumentById: deleteDocumentById,
-            updateDocumentById: updateDocumentById
+            updateDocumentById: updateDocumentById,
+            getAllData: getAllData,
+            getProperties: getAllProperties,
+            getDocumentById: getDocumentById
         };
         return api;
 
@@ -67,6 +77,44 @@
                 if(documents[i]._id == documentId) {
                     documents[i] = newDocument;
                     callback(newDocument);
+                }
+            }
+        }
+
+        function getAllData(documentId, callback) {
+            var data = {};
+            var currentDoc = documents[documentId];
+
+            for (var prop in currentDoc) {
+                data[prop] = currentDoc[prop];
+            }
+            callback(data);
+        }
+
+        function getAllProperties(documentId, callback) {
+            var prop = [];
+            var doc = null;
+            for (var i = 0; i < documents.length;i++) {
+                if (documents[i]._id = documentId) {
+                    doc = documents[i];
+                    break;
+                }
+            }
+
+            for(var p in doc) {
+                if(p != "_id" && p != "name" && p != "collectionId") {
+                    prop.push(p);
+                }
+            }
+
+            console.log("In Service properties: " + prop);
+            callback(prop);
+        }
+
+        function getDocumentById(docId, callback) {
+            for (var i = 0; i < documents.length;i++) {
+                if (documents[i]._id = docId) {
+                    callback(documents[i]);
                 }
             }
         }

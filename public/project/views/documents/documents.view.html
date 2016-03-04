@@ -33,7 +33,7 @@
                          </tr>
                          <tr ng-repeat="doc in documents" ng-class="{'selectTableRow': selectedDocument == doc._id}"  ng-click="selectDocument(doc)">
                              <td class="tableBorder cursor">
-                                 <a href="#/documents/{{doc._id}}" class="linkColor">{{doc.name}}</a>
+                                 <a href="#/data/{{doc._id}}" class="linkColor">{{doc.name}}</a>
                              </td>
                              <td class="tableBorder">
                                  <div class="floatRight">
