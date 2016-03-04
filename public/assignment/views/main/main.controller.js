@@ -8,8 +8,7 @@
         .module("FormBuilderApp")
         .controller("MainController", MainController);
 
-    function MainController($scope, $location, $rootScope) {
+    function MainController($scope, $location) {
         $scope.$location = $location;
-        $rootScope.currentUser = null;
     }
 })();

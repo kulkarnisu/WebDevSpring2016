@@ -9,10 +9,11 @@
         .controller("HeaderController", HeaderController);
 
     function HeaderController($scope, $rootScope) {
+        $scope.currentUser = $rootScope.currentUser;
         $scope.logOut = logOut();
 
         function logOut() {
-            $rootScope.currentUser = null;
+            delete $rootScope.currentUser;
         }
     }
 })();
