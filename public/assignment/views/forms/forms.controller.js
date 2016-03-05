@@ -10,10 +10,6 @@
 
     function FormsController($scope, $rootScope, FormService, $location) {
 
-        if (!$rootScope.currentUser) {
-            $location.url("/home");
-        }
-
         //Event handler declarations
         $scope.addForm = addForm;
         $scope.updateForm = updateForm;

@@ -12,17 +12,17 @@
 
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
-                <li ng-class="{'active': $location.url() == '/register'}">
+                <li ng-class="{'active': $location.url() == '/register'}" ng-hide="currentUser">
                     <a href="#/register">Register</a>
                 </li>
-                <li ng-class="{'active': $location.url() == '/login'}">
+                <li ng-class="{'active': $location.url() == '/login'}" ng-hide="currentUser">
                     <a href="#/login">Login</a>
                 </li>
-                <li ng-class="{'active': $location.url() == '/profile'}">
+                <li ng-class="{'active': $location.url() == '/profile'}" ng-show="currentUser">
                     <a href="#/profile">Profile</a>
                 </li>
-                <li>
-                    <a href="#/home" ng-click="logOut()">Logout</a>
+                <li ng-show="currentUser">
+                    <a href="#/home" ng-click="logout()">Logout</a href="#/home">
                 </li>
             </ul>
         </div>
