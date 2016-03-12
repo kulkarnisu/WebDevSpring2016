@@ -37,7 +37,6 @@
             }
         }
 
-
         function updateForm(form) {
             FormService.updateFormById(form._id,form, displayUpdatedForm);
 
