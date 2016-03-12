@@ -11,7 +11,7 @@
     var documents = [
         {
             _id: 212,
-            name: "Avatar",
+            name: "Mydoc",
             collectionId: 12143,
             movieName: "Avatar",
             director: "James Cameron",
@@ -36,7 +36,10 @@
             updateDocumentById: updateDocumentById,
             getAllData: getAllData,
             getProperties: getAllProperties,
-            getDocumentById: getDocumentById
+            getDocumentById: getDocumentById,
+            createDocumentProp: createDocumentProp,
+            deleteProperty: deleteProperty,
+            updateProperty: updateProperty
         };
         return api;
 
@@ -102,7 +105,7 @@
             }
 
             for(var p in doc) {
-                if(p != "_id" && p != "name" && p != "collectionId") {
+                if(p != "_id" && p != "name" && p != "collectionId" && p!= "$$hashKey") {
                     prop.push(p);
                 }
             }
@@ -115,8 +118,41 @@
             for (var i = 0; i < documents.length;i++) {
                 if (documents[i]._id = docId) {
                     callback(documents[i]);
+                    break;
                 }
             }
+        }
+
+        function createDocumentProp(docId, prop, callback) {
+            for(var i = 0; i < documents.length; i++) {
+                if(documents[i]._id == docId) {
+                    documents[i][prop.name] = prop.value;
+                    callback(documents[i]);
+                    break;
+                }
+            }
+        }
+
+        function deleteProperty(docId, propName, callback) {
+            for(var i = 0; i < documents.length; i++) {
+                if(documents[i]._id == docId) {
+                    delete documents[i][propName];
+                    callback(documents[i]);
+                    break;
+                }
+            }
+        }
+
+        function updateProperty(docId, prop, callback) {
+            var docToBeReturned = null;
+            for(var i = 0; i < documents.length; i++) {
+                if (documents[i]._id == docId) {
+                    documents[i][prop.name] = prop.value;
+                    docToBeReturned = documents[i];
+                    break;
+                }
+            }
+            callback(docToBeReturned);
         }
 
     }
