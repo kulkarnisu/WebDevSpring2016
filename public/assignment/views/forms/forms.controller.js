@@ -22,6 +22,7 @@
             $scope.forms=forms;
         }
 
+
         //Event handler implementations
         function addForm(form) {
             FormService.createFormForUser($rootScope.currentUser._id, form, addInView);
