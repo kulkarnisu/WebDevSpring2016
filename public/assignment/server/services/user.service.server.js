@@ -31,28 +31,33 @@ module.exports = function(app) {
     app.delete("/api/assignment/user/:id", deleteUserById);
 
     function createUser (req, res) {
+
         var user = req.body;
 
         res.send(userModel.createUser(user));
     }
 
     function findAllusers (req, res) {
+
         res.json(userModel.findAllUsers());
     }
 
     function findUserById(req, res) {
-        var usereId = req.param.id;
+
+        var usereId = parseInt(req.param.id);
 
         res.json(userModel.findUserById(userId));
     }
 
     function findUserByUsername(req, res) {
+
         var username = req.param.username;
 
         res.json(userModel.findUserByUsername(username));
     }
 
     function findUserByCredentials(req, res) {
+
         var username = req.params.username;
         var password = req.params.password;
 
@@ -62,7 +67,8 @@ module.exports = function(app) {
     }
 
     function updateUserById(req, res) {
-        var userId = req.param.id;
+
+        var userId = parseInt(req.param.id);
         var user = req.body;
 
         userModel.updateUserById(userId, user);
@@ -70,7 +76,8 @@ module.exports = function(app) {
     }
 
     function deleteUserById(req, res) {
-        var userId = req.param.id;
+
+        var userId = parseInt(req.param.id);
 
         userModel.deleteUserById(userId);
 

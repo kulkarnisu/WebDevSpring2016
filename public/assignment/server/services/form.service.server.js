@@ -28,8 +28,9 @@ module.exports = function(app) {
     app.delete("/api/assignment/form/:formId", deleteFormById);
 
     function createForm (req, res) {
+
         var form = req.body;
-        var userId = req.param.userId;
+        var userId = parseInt(req.param.userId);
 
         form.userId = userId;
         form._id = uuid.v4();
@@ -39,22 +40,26 @@ module.exports = function(app) {
     }
 
     function findAllformsForUser(req, res) {
-        var userId = req.param.userId;
+
+        var userId = parseInt(req.param.userId);
         res.json(formModel.findAllFormsByUserId(userId));
     }
 
     function findAllForms(req, res) {
+
         res.json(formModel.findAllForms());
     }
 
     function findFormById(req, res) {
-        var formeId = req.param.formId;
+
+        var formId = parseInt(req.param.formId);
 
         res.json(formModel.findFormById(formId));
     }
 
     function updateFormById(req, res) {
-        var formId = req.param.formId;
+
+        var formId = parseInt(req.param.formId);
         var form = req.body;
 
         formModel.updateFormById(formId, form);
@@ -62,7 +67,8 @@ module.exports = function(app) {
     }
 
     function deleteFormById(req, res) {
-        var formId = req.param.formId;
+
+        var formId = parseInt(req.param.formId);
 
         formModel.deleteFormById(formId);
 

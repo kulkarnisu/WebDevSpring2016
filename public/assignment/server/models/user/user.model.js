@@ -18,53 +18,76 @@ module.exports = function() {
     return api;
 
     function createUser(user) {
+
         mock.push(user);
         return mock;
     }
 
     function findUserById(userId) {
+
         for (var i in mock) {
+
             if(mock[i]._id === userId) {
+
                 return mock[i];
             }
         }
         return null;
     }
 
-    function findAllUsers() {return mock;}
+    function findAllUsers() {
+
+        return mock;
+    }
 
     function updateUserById(userId, user) {
+
         for (var i in mock) {
+
             if(mock[i]._id === userId) {
+
                 mock[i] = user;
                 break;
             }
         }
+
         return mock;
     }
 
     function deleteUserId(userId) {
+
         for (var i in mock) {
+
             if (mock[i]._id === userId) {
+
                 mock.splice(i,1);
                 break;
             }
         }
+
         return mock;
     }
 
     function findUserByUsername(userName) {
+
         for (var i in mock) {
+
             if (mock[i].username === userName) {
+
                 return mock[i];
             }
         }
+
         return null;
     }
 
     function findUserByCredentials(credentials) {
+
         for (var i in mock) {
-            if (mock[i].username === credentials.username && mock[i].password === credentials.password) {
+
+            if (mock[i].username === credentials.username
+                && mock[i].password === credentials.password) {
+
                 return mock[i];
             }
         }
