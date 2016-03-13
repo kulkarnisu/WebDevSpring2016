@@ -12,15 +12,15 @@
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
     <!-- Custom styles for this template -->
     <link href="http://getbootstrap.com/examples/dashboard/dashboard.css" rel="stylesheet">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="client/css/style.css">
 </head>
 
 <body ng-controller="MainController">
-<div ng-include="'views/header/header.view.html'"></div>
+<div ng-include="'client/views/header/header.view.html'"></div>
 
 <div class="container-fluid">
     <div class="row">
-        <div ng-include="'views/sidebar/sidebar.view.html'"></div>
+        <div ng-include="'client/views/sidebar/sidebar.view.html'"></div>
     </div>
     <div class="ng-view">
 
@@ -35,22 +35,22 @@
 <!--Anguler Routing-->
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular-route.min.js"></script>
 <!--Main Angular App-->
-<script src="js/app.js"></script>
+<script src="client/js/app.js"></script>
 <!--Angular Routing config-->
-<script src="js/config.js"></script>
+<script src="client/js/config.js"></script>
 <!--Controllers-->
-<script src="views/main/main.controller.js"></script>
-<script src="views/admin/admin.controller.js"></script>
-<script src="views/forms/forms.controller.js"></script>
-<script src="views/forms/fields.controller.js"></script>
-<script src="views/header/header.controller.js"></script>
-<script src="views/home/home.controller.js"></script>
-<script src="views/sidebar/sidebar.controller.js"></script>
-<script src="views/users/login.controller.js"></script>
-<script src="views/users/profile.controller.js"></script>
-<script src="views/users/register.controller.js"></script>
+<script src="client/views/main/main.controller.js"></script>
+<script src="client/views/admin/admin.controller.js"></script>
+<script src="client/views/forms/forms.controller.js"></script>
+<script src="client/views/forms/fields.controller.js"></script>
+<script src="client/views/header/header.controller.js"></script>
+<script src="client/views/home/home.controller.js"></script>
+<script src="client/views/sidebar/sidebar.controller.js"></script>
+<script src="client/views/users/login.controller.js"></script>
+<script src="client/views/users/profile.controller.js"></script>
+<script src="client/views/users/register.controller.js"></script>
 <!--Services-->
-<script src="services/user.service.client.js"></script>
-<script src="services/forms.service.client.js"></script>
+<script src="client/services/user.service.client.js"></script>
+<script src="client/services/forms.service.client.js"></script>
 </body>
 </html>
