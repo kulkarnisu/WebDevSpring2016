@@ -46,7 +46,7 @@ module.exports = function() {
     function deleteUserId(userId) {
         for (var i in mock) {
             if (mock[i]._id === userId) {
-                delete mock[i];
+                mock.splice(i,1);
                 break;
             }
         }

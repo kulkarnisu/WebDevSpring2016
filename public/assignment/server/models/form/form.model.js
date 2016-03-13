@@ -12,13 +12,13 @@ module.exports = function() {
         findAllForms: findAllForms,
         updateFormById: updateFormById,
         deleteFormId: deleteFormId,
-        findFormByTitle: findFormByTitle
+        findFormByTitle: findFormByTitle,
+        findAllFormsByUserId: findAllFormsByUserId,
     };
     return api;
 
     function createForm(form) {
         mock.push(form);
-        return mock;
     }
 
     function findFormById(formId) {
@@ -45,7 +45,7 @@ module.exports = function() {
     function deleteFormId(formId) {
         for (var i in mock) {
             if (mock[i]._id === formId) {
-                delete mock[i];
+                mock.splice(i,1);
                 break;
             }
         }
@@ -59,6 +59,18 @@ module.exports = function() {
             }
         }
         return null;
+    }
+
+    function findAllFormsByUserId(userId) {
+        var forms;
+
+        for (var i in mock) {
+            if (mock[i].userId === userId) {
+                forms.push(mock[i]);
+            }
+        }
+
+        return forms;
     }
 
 }
