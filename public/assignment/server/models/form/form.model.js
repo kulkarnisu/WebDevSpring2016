@@ -3,7 +3,7 @@
  */
 "use strict"
 
-var mock = require("./form.mock.js");
+var mock = require("./form.mock.json");
 
 module.exports = function() {
     var api = {
