@@ -3,7 +3,7 @@
  */
 "use strict"
 
-var mock = require("./user.mock.json");
+var mock = require("./user.mock.js");
 
 module.exports = function() {
     var api = {

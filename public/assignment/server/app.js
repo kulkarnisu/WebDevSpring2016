@@ -1,8 +1,8 @@
 /**
  * Created by sudeep on 2/19/16.
  */
-"use strict";
-
-(function() {
-    angular.module("FormBuilderApp", ["ngRoute"]);
-})();
+module.exports = function(app) {
+    require("./services/user.service.server.js")(app);
+    require("./services/form.service.server.js")(app);
+    require("./services/field.service.server.js")(app);
+}

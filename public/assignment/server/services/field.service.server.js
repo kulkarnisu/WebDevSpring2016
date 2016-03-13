@@ -34,12 +34,12 @@ module.exports = function (app) {
     function createFormField (req, res) {
 
         var field = req.body;
-        var formId = req.param.formId;
+        var formId = parseInt(req.param.formId);
 
         field._id = uuid.v4();
 
         formModel.createFieldForForm(formId, field);
-        res.json(formModel.findAllFormsByUserId(userId));
+        res.json(formModel.findAllFieldsForForm(formId));
     }
 
     function findAllFieldsForForm(req, res) {
