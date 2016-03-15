@@ -35,6 +35,8 @@
                     $scope.user.firstName = updatedUser.firstName;
                     $scope.user.lastName = updatedUser.lastName;
                     $scope.user.email = updatedUser.email;
+
+                    $rootScope.currentUser = updatedUser;
                 });
             }
         }

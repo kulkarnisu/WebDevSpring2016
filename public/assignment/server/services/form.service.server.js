@@ -3,9 +3,7 @@
  */
 "use strict"
 
-module.exports = function(app) {
-    var formModel = require("./../models/form/form.model.js")();
-    var uuid = require('node-uuid');
+module.exports = function(app, formModel, uuid) {
 
     //creates a new form whose properties are the same as the form object embedded in the HTTP request's body and
     //the form belongs to a user whose id is equal to the userId path parameter.
@@ -30,7 +28,7 @@ module.exports = function(app) {
     function createForm (req, res) {
 
         var form = req.body;
-        var userId = parseInt(req.param.userId);
+        var userId = parseInt(req.params.userId);
 
         form.userId = userId;
         form._id = uuid.v4();
@@ -41,7 +39,8 @@ module.exports = function(app) {
 
     function findAllformsForUser(req, res) {
 
-        var userId = parseInt(req.param.userId);
+        var userId = parseInt(req.params.userId);
+
         res.json(formModel.findAllFormsByUserId(userId));
     }
 
@@ -52,14 +51,14 @@ module.exports = function(app) {
 
     function findFormById(req, res) {
 
-        var formId = parseInt(req.param.formId);
+        var formId = parseInt(req.params.formId);
 
         res.json(formModel.findFormById(formId));
     }
 
     function updateFormById(req, res) {
 
-        var formId = parseInt(req.param.formId);
+        var formId = parseInt(req.params.formId);
         var form = req.body;
 
         formModel.updateFormById(formId, form);
@@ -68,7 +67,7 @@ module.exports = function(app) {
 
     function deleteFormById(req, res) {
 
-        var formId = parseInt(req.param.formId);
+        var formId = parseInt(req.params.formId);
 
         formModel.deleteFormById(formId);
 

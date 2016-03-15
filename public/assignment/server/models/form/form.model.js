@@ -42,9 +42,15 @@ module.exports = function() {
         return null;
     }
 
-    function findAllForms() {return mock;}
+    function findAllForms() {
+
+        return mock;
+    }
 
     function updateFormById(formId, form) {
+
+        form._id = formId;
+
         for (var i in mock) {
 
             if(mock[i]._id === formId) {
@@ -80,7 +86,7 @@ module.exports = function() {
     }
 
     function findAllFormsByUserId(userId) {
-        var forms;
+        var forms = [];
 
         for (var i in mock) {
 
@@ -133,6 +139,8 @@ module.exports = function() {
     }
 
     function updateFieldByFieldIdAndFormId(formId, fieldId, field) {
+
+        field._id = fieldId;
 
         for (var i in mock) {
 

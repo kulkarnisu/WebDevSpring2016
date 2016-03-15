@@ -3,10 +3,7 @@
  */
 "use strict"
 
-module.exports = function (app) {
-
-    var formModel = require("./../models/form/form.model.js")();
-    var uuid = require('node-uuid');
+module.exports = function (app, formModel, uuid) {
 
     //creates a new field whose properties are the same as the field object embedded in the request's body and
     // the field belongs to a form whose id is equal to the formId path parameter.
@@ -34,17 +31,19 @@ module.exports = function (app) {
     function createFormField (req, res) {
 
         var field = req.body;
-        var formId = parseInt(req.param.formId);
+        var formId = parseInt(req.params.formId);
 
         field._id = uuid.v4();
 
         formModel.createFieldForForm(formId, field);
+
         res.json(formModel.findAllFieldsForForm(formId));
     }
 
     function findAllFieldsForForm(req, res) {
 
-        var formId = parseInt(req.param.formId);
+        var formId = parseInt(req.params.formId);
+
         res.json(formModel.findAllFieldsForForm(formId));
     }
 

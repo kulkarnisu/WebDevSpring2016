@@ -3,8 +3,7 @@
  */
 "use strict"
 
-module.exports = function(app) {
-    var userModel = require("./../models/user/user.model.js")();
+module.exports = function(app, userModel) {
 
     //creates a new user embedded in the body of the request, and responds with an array of all users
     app.post("/api/assignment/user", createUser);
