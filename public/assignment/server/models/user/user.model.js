@@ -42,6 +42,8 @@ module.exports = function() {
 
     function updateUserById(userId, user) {
 
+        user._id = userId;
+
         for (var i in mock) {
 
             if(mock[i]._id === userId) {
@@ -83,15 +85,18 @@ module.exports = function() {
 
     function findUserByCredentials(credentials) {
 
+        var userFound = null;
+
         for (var i in mock) {
 
             if (mock[i].username === credentials.username
                 && mock[i].password === credentials.password) {
-
-                return mock[i];
+                userFound = mock[i];
+                break;
             }
         }
-        return null;
+
+        return userFound;
     }
 
 }

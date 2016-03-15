@@ -12,11 +12,15 @@
         $scope.login = login;
 
         function login(user) {
-            UserService.findUserByUsernameAndPassword(user.username, user.password, isUserPresent);
+            UserService.findUserByCredentials(user.username, user.password).then(isUserPresent);
         }
 
         function isUserPresent(userFound) {
+
+            console.log(userFound);
+
             if(userFound) {
+
                 $rootScope.currentUser = userFound;
                 $location.url("/profile");
             }

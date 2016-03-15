@@ -16,7 +16,7 @@ module.exports = function(app) {
     app.get("/api/assignment/user/:id", findUserById);
 
     //responds with a single user whose username property is equal to the username path parameter
-    app.get("api/assignment/user?username=:username", findUserByUsername);
+    app.get("/api/assignment/user?username=:username", findUserByUsername);
 
     //responds with a single user whose username property is equal to the username path parameter
     //and its password is equal to the password path parameter
@@ -39,48 +39,59 @@ module.exports = function(app) {
 
     function findAllusers (req, res) {
 
-        res.json(userModel.findAllUsers());
+        if(req.query.username && req.query.password) {
+
+            findUserByCredentials(req, res);
+
+        }else if (req.query.username) {
+
+            findUserByUsername(req, res);
+
+        }else {
+
+            res.json(userModel.findAllUsers());
+        }
     }
 
     function findUserById(req, res) {
 
-        var usereId = parseInt(req.param.id);
+        var userId = parseInt(req.params.id);
 
         res.json(userModel.findUserById(userId));
     }
 
     function findUserByUsername(req, res) {
 
-        var username = req.param.username;
+        var username = req.query.username;
 
         res.json(userModel.findUserByUsername(username));
     }
 
     function findUserByCredentials(req, res) {
 
-        var username = req.params.username;
-        var password = req.params.password;
+        var username = req.query.username;
+        var password = req.query.password;
 
-        var credentials = {username: username, passwword: password};
+        var credentials = {username: username, password: password};
 
         res.json(userModel.findUserByCredentials(credentials));
     }
 
     function updateUserById(req, res) {
 
-        var userId = parseInt(req.param.id);
+        var userId = parseInt(req.params.id);
         var user = req.body;
 
         userModel.updateUserById(userId, user);
-        res.sendStatus(200);
+        res.send(200);
     }
 
     function deleteUserById(req, res) {
 
-        var userId = parseInt(req.param.id);
+        var userId = parseInt(req.params.id);
 
         userModel.deleteUserById(userId);
 
-        res.sendStatus(200);
+        res.send(200);
     }
 }

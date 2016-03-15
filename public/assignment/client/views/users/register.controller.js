@@ -9,11 +9,18 @@
         .controller("RegisterController", RegisterController);
 
     function RegisterController(UserService, $scope, $rootScope, $location) {
+
         $scope.register = register;
+
         function register(user) {
-            UserService.createUser(user, function(newUser) {
-                $rootScope.currentUser = newUser;
-                $location.url("/profile");
+
+            UserService.createUser(user).then(function(users) {
+
+                UserService.findUserByUsername(user.username).then(function (newUser) {
+
+                    $rootScope.currentUser = newUser;
+                    $location.url("/profile");
+                });
             });
         }
     }
