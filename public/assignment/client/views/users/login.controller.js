@@ -8,8 +8,11 @@
         .module("FormBuilderApp")
         .controller("LoginController", LoginController);
 
-    function LoginController($scope, $rootScope, UserService, $location) {
-        $scope.login = login;
+    function LoginController($rootScope, UserService, $location) {
+
+        var vm = this;
+
+        vm.login = login;
 
         function login(user) {
 

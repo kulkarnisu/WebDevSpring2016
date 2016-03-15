@@ -8,7 +8,10 @@
         .module("FormBuilderApp")
         .controller("SidebarController", SidebarController);
 
-    function SidebarController($scope, $rootScope) {
+    function SidebarController($rootScope) {
 
+        var vm = this;
+
+        (function init() { })();
     }
 })();

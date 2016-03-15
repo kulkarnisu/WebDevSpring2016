@@ -13,7 +13,7 @@ module.exports = function() {
         findFormById: findFormById,
         findAllForms: findAllForms,
         updateFormById: updateFormById,
-        deleteFormId: deleteFormId,
+        deleteFormById: deleteFormById,
         findFormByTitle: findFormByTitle,
         findAllFormsByUserId: findAllFormsByUserId,
 
@@ -27,6 +27,8 @@ module.exports = function() {
     return api;
 
     function createForm(form) {
+
+        console.log(form);
 
         mock.push(form);
     }
@@ -49,20 +51,19 @@ module.exports = function() {
 
     function updateFormById(formId, form) {
 
-        form._id = formId;
-
         for (var i in mock) {
 
             if(mock[i]._id === formId) {
 
-                mock[i] = form;
+                mock[i].title = form.title;
                 break;
             }
         }
+
         return mock;
     }
 
-    function deleteFormId(formId) {
+    function deleteFormById(formId) {
         for (var i in mock) {
 
             if (mock[i]._id === formId) {

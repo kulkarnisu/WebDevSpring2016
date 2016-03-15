@@ -8,9 +8,11 @@
         .module("FormBuilderApp")
         .controller("RegisterController", RegisterController);
 
-    function RegisterController(UserService, $scope, $rootScope, $location) {
+    function RegisterController(UserService, $rootScope, $location) {
 
-        $scope.register = register;
+        var vm = this;
+
+        vm.register = register;
 
         function register(user) {
 

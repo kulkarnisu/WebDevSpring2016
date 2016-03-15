@@ -8,17 +8,21 @@
         .module("FormBuilderApp")
         .controller("ProfileController", ProfileController);
 
-    function ProfileController($scope, $rootScope, UserService, $location) {
+    function ProfileController($rootScope, UserService, $location) {
 
-        $scope.user= {};
+        var vm = this;
 
-        $scope.user.username = $rootScope.currentUser.username;
-        $scope.user.password = $rootScope.currentUser.password;
-        $scope.user.email = $rootScope.currentUser.email;
-        $scope.user.firstName = $rootScope.currentUser.firstName;
-        $scope.user.lastName = $rootScope.currentUser.lastName;
+        vm.update = update;
 
-        $scope.update = update;
+        vm.user= {};
+
+        vm.user.username = $rootScope.currentUser.username;
+        vm.user.password = $rootScope.currentUser.password;
+        vm.user.email = $rootScope.currentUser.email;
+        vm.user.firstName = $rootScope.currentUser.firstName;
+        vm.user.lastName = $rootScope.currentUser.lastName;
+
+        vm.update = update;
 
         function update(user) {
 
@@ -31,10 +35,10 @@
 
                 UserService.findUserById($rootScope.currentUser._id).then (function (updatedUser) {
 
-                    $scope.user.username = updatedUser.username;
-                    $scope.user.firstName = updatedUser.firstName;
-                    $scope.user.lastName = updatedUser.lastName;
-                    $scope.user.email = updatedUser.email;
+                    vm.user.username = updatedUser.username;
+                    vm.user.firstName = updatedUser.firstName;
+                    vm.user.lastName = updatedUser.lastName;
+                    vm.user.email = updatedUser.email;
 
                     $rootScope.currentUser = updatedUser;
                 });

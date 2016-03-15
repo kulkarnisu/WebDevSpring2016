@@ -3,7 +3,7 @@
  */
 "use strict"
 
-module.exports = function(app, userModel) {
+module.exports = function(app, userModel, uuid) {
 
     //creates a new user embedded in the body of the request, and responds with an array of all users
     app.post("/api/assignment/user", createUser);
@@ -32,6 +32,8 @@ module.exports = function(app, userModel) {
     function createUser (req, res) {
 
         var user = req.body;
+
+        user._id = parseInt(uuid.v4());
 
         res.send(userModel.createUser(user));
     }
@@ -79,6 +81,7 @@ module.exports = function(app, userModel) {
     function updateUserById(req, res) {
 
         var userId = parseInt(req.params.id);
+
         var user = req.body;
 
         userModel.updateUserById(userId, user);

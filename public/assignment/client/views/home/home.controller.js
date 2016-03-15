@@ -8,7 +8,11 @@
         .module("FormBuilderApp")
         .controller("HomeController", HomeController);
 
-    function HomeController($scope, $rootScope) {
+    function HomeController($rootScope) {
+        var vm = this;
 
+        (function init() {
+
+        })();
     }
 })();

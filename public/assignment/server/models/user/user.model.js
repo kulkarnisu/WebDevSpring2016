@@ -20,6 +20,7 @@ module.exports = function() {
     function createUser(user) {
 
         mock.push(user);
+
         return mock;
     }
 

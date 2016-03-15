@@ -8,8 +8,11 @@
         .module("FormBuilderApp")
         .controller("HeaderController", HeaderController);
 
-    function HeaderController($scope, $rootScope) {
-        $scope.logout = logout;
+    function HeaderController($rootScope) {
+
+        var vm = this;
+
+        vm.logout = logout;
 
         function logout() {
             delete $rootScope.currentUser;

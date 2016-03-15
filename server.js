@@ -1,10 +1,10 @@
 #!/bin/env node
 var express       = require('express');
 var app           = express();
+
 var bodyParser    = require('body-parser');
 var multer        = require('multer');
 var uuid          = require('node-uuid');
-
 
 app.use(express.static(__dirname + '/public'));
 

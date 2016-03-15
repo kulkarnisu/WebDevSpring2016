@@ -1,4 +1,4 @@
-<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2" ng-controller="FormsController">
+<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2">
 
     <h1 class="page-header">Forms</h1>
 
@@ -37,21 +37,21 @@
                     <tbody>
                     <tr>
                         <td class="col-md-10">
-                            <input type="text" placeholder="Name" class="form-control" ng-model="form.title">
+                            <input type="text" placeholder="Name" class="form-control" ng-model="model.form.title">
                         </td>
                         <td class="col-md-2 right-align-cell">
                             <span class="glyphicon glyphicon-plus glyphicon-big hover"
-                                  ng-click="addForm(form)"></span>
+                                  ng-click="model.addForm(model.form)"></span>
                             <span>&nbsp;&nbsp;</span>
-                            <span class="glyphicon glyphicon-ok glyphicon-big hover" ng-click="updateForm(form)"></span>
+                            <span class="glyphicon glyphicon-ok glyphicon-big hover" ng-click="model.updateForm(model.form)"></span>
                         </td>
                     </tr>
-                    <tr ng-repeat="form in forms">
+                    <tr ng-repeat="form in model.forms">
                         <td>{{form.title}}</td>
                         <td class="right-align-cell">
-                            <span class="glyphicon glyphicon-remove glyphicon-big hover" ng-click="deleteForm($index)"></span>
+                            <span class="glyphicon glyphicon-remove glyphicon-big hover" ng-click="model.deleteForm($index)"></span>
                             <span>&nbsp;&nbsp;</span>
-                            <span class="glyphicon glyphicon-pencil glyphicon-big hover" ng-click="selectForm($index)"></span>
+                            <span class="glyphicon glyphicon-pencil glyphicon-big hover" ng-click="model.selectForm($index)"></span>
                         </td>
                     </tr>
                     </tbody>

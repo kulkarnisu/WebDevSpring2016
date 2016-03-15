@@ -8,67 +8,83 @@
         .module("FormBuilderApp")
         .controller("FormsController", FormsController);
 
-    function FormsController($scope, $rootScope, FormService, $location) {
+    function FormsController($rootScope, FormService, $location) {
 
-        //Event handler declarations
-        $scope.addForm = addForm;
-        $scope.updateForm = updateForm;
-        $scope.deleteForm = deleteForm;
-        $scope.selectForm = selectForm;
+        var vm = this;
 
-        FormService.findAllFormsForUser($rootScope.currentUser._id, getAllForms);
+        function init() {
 
-        function getAllForms(forms){
-            $scope.forms=forms;
+            FormService.findAllFormsForUser($rootScope.currentUser._id).then(function(response) {
+
+                vm.forms = response;
+
+                console.log("Forms: ");
+
+            });
         }
+        init();
 
+        var toBeUpdatedIndex = -1;
+        
+        //Event handler declarations
+        vm.addForm = addForm;
+        vm.updateForm = updateForm;
+        vm.deleteForm = deleteForm;
+        vm.selectForm = selectForm;
 
         //Event handler implementations
         function addForm(form) {
-            FormService.createFormForUser($rootScope.currentUser._id, form, addInView);
 
-            function addInView(form) {
-                var newForm = {
-                    _id: form._id,
-                    title: form.title,
-                    userId: form.userId
-                };
-                $scope.forms.push(newForm);
-                $scope.form = {};
-            }
+            FormService.createFormForUser($rootScope.currentUser._id, form).then(function(response) {
+                vm.forms = response;
+            });
+            vm.form = {};
         }
 
         function updateForm(form) {
-            FormService.updateFormById(form._id,form, displayUpdatedForm);
 
-            function displayUpdatedForm(updatedForm) {
-                var index = $scope.forms.indexOf(form);
-                $scope.forms[index] = updatedForm;
-            }
-            $scope.form={};
+            FormService.updateFormById(form._id, form).then(function (response) {
+
+                if (response === "OK") {
+                    FormService.findFormById(form._id).then(function(updatedForm) {
+
+                        console.log("Updated Form index: " + toBeUpdatedIndex);
+                        console.log(updatedForm);
+                        vm.forms[toBeUpdatedIndex] = updatedForm;
+                    });
+                }
+            });
+
+            vm.form={};
         }
 
         function deleteForm($index) {
-            var formID = $scope.forms[$index]._id;
-            FormService.deleteFormById(formID, updateForms);
 
-            function updateForms(updatedForms) {
-                FormService.findAllFormsForUser($rootScope.currentUser._id, getAllForms);
+            var formID = vm.forms[$index]._id;
 
-                function getAllForms(forms){
-                    $scope.forms=forms;
+            var formID = vm.forms[$index]._id;
+
+            FormService.deleteFormById(formID).then(function(response) {
+
+                if(response === "OK") {
+                    init();
                 }
-            }
+            });
         }
 
         function selectForm($index) {
-            $scope.form={};
-            var selectedForm = $scope.forms[$index];
-            $scope.form = {
+
+            vm.form={};
+
+            var selectedForm = vm.forms[$index];
+
+            vm.form = {
                 _id: selectedForm._id,
                 title: selectedForm.title,
                 userId: selectedForm.userId
             };
+
+            toBeUpdatedIndex = $index;
         }
     }
 })();

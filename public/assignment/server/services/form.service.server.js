@@ -31,7 +31,7 @@ module.exports = function(app, formModel, uuid) {
         var userId = parseInt(req.params.userId);
 
         form.userId = userId;
-        form._id = uuid.v4();
+        form._id = parseInt(uuid.v4());
 
         formModel.createForm(form);
         res.json(formModel.findAllFormsByUserId(userId));
@@ -62,7 +62,8 @@ module.exports = function(app, formModel, uuid) {
         var form = req.body;
 
         formModel.updateFormById(formId, form);
-        res.sendStatus(200);
+
+        res.send(200);
     }
 
     function deleteFormById(req, res) {
@@ -71,6 +72,6 @@ module.exports = function(app, formModel, uuid) {
 
         formModel.deleteFormById(formId);
 
-        res.sendStatus(200);
+        res.send(200);
     }
 }
