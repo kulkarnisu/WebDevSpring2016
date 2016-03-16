@@ -21,7 +21,7 @@
 
                 <table class="table table-bordered table-hover thick-top-border">
 
-                    <thead>
+                    <thead class="thead-inverse">
                     <tr>
                         <th>
                             <span class="glyphicon glyphicon-triangle-bottom hover"></span>
@@ -47,7 +47,11 @@
                         </td>
                     </tr>
                     <tr ng-repeat="form in model.forms">
-                        <td>{{form.title}}</td>
+                        <td>
+
+                            <a href="#/form/{{form._id}}/fields">{{form.title}}</a>
+                            
+                        </td>
                         <td class="right-align-cell">
                             <span class="glyphicon glyphicon-remove glyphicon-big hover" ng-click="model.deleteForm($index)"></span>
                             <span>&nbsp;&nbsp;</span>

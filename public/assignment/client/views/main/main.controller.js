@@ -13,6 +13,7 @@
         var vm = this;
 
         function init() {
+            
             UserService.getCurrentUser().then(function (response) {
 
                 if(response.data) {

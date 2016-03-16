@@ -61,7 +61,7 @@ module.exports = function (app, formModel, uuid) {
         var fieldId = parseInt(req.params.fieldId);
         var field = req.body;
 
-       res.sendStatus(200);
+       res.send(200);
     }
 
     function deleteFieldByFieldIdAndFormId (req, res) {
@@ -71,7 +71,7 @@ module.exports = function (app, formModel, uuid) {
 
         formModel.deleteFieldByFieldIdAndFormId(formId, fieldId);
 
-        res.sendStatus(200);
+        res.send(200);
     }
 
 }

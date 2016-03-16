@@ -30,7 +30,8 @@ table.thick-top-border{
     text-align: right;
 }
 #my-form{
-    padding: 10px 0 0 10px;
+    margin-top: 10px;
+    padding: 10px 0 10px 10px;
     border: 1px solid #dddddd;
 }
 #my-form span.glyphicon {
@@ -48,6 +49,12 @@ table.thick-top-border{
 .nav-tabs{
     border-bottom:none;
 }
+
 #forms-n-fields-tbl {
     margin-top: 10px;
+}
+
+.thead-inverse th {
+    color: #fff;
+    background-color: #373a3c;
 }
