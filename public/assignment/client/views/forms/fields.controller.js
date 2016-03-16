@@ -12,7 +12,11 @@
 
         var vm = this;
 
-        vm.fields = {};
+        vm.fields = [];
+
+        vm.options = [];
+
+        vm.field = {}
 
         vm.removeField = removeField;
 
@@ -36,6 +40,15 @@
 
                 $location.url("/forms");
             }
+
+            vm.options = [
+                {name: "Single Line Text Field", value: "sline-text"},
+                {name: "Multi Line Text Field", value: "mline-text"},
+                {name: "Date Field", value: "date"},
+                {name: "Dropdown Field", value: "dropdown"},
+                {name: "Checkboxes Field", value: "checkbox"},
+                {name: "Radio Buttons Field", value: "radio"}
+            ];
         }
         init();
 

@@ -53,18 +53,22 @@
 
                 controllerAs: "model"
             })
-            .when("/form/:formId/fields", {
-                templateUrl: "client/views/forms/fields.view.html",
-
-                controller: "FieldsController",
-
-                controllerAs: "model"
-            })
             .when("/forms", {
 
                 templateUrl: "client/views/forms/forms.view.html",
 
                 controller: "FormsController",
+
+                controllerAs: "model",
+
+                resolve: {
+                    checkLoggedIn: checkLoggedIn
+                }
+            })
+            .when("/form/:formId/fields", {
+                templateUrl: "client/views/forms/fields.view.html",
+
+                controller: "FieldsController",
 
                 controllerAs: "model",
 
