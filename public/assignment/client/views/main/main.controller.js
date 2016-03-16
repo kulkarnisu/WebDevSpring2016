@@ -12,7 +12,11 @@
 
         var vm = this;
 
-        vm.$location = $location;
+        function init() {
+
+            vm.$location = $location;
+        }
+        init();
 
         $rootScope.currentUser = null;
     }

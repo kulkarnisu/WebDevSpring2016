@@ -12,6 +12,12 @@
 
         var vm = this;
 
+        function init() {
+
+            vm.$location = $location;
+        }
+        init();
+
         vm.logout = logout;
 
         function logout() {

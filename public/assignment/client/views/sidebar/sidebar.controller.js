@@ -12,6 +12,10 @@
 
         var vm = this;
 
-        (function init() { })();
+        function init() {
+
+            vm.$location = $location;
+        }
+        init();
     }
 })();
