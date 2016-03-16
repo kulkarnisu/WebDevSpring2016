@@ -91,6 +91,9 @@ module.exports = function(app, userModel, uuid) {
 
     function loggedIn(req, res) {
 
+        if(!req.session.currentUser) {
+            req.session.currentUser = null;
+        }
         res.json(req.session.currentUser);
     }
 

@@ -1,8 +1,9 @@
-<div class="col-sm-3 col-md-2 sidebar">
+<div class="col-sm-3 col-md-2 sidebar" ng-controller = "SidebarController as model">
 
     <ul class="nav nav-sidebar">
 
         <li ng-class="{'active': model.$location.url() == '/home'}">
+
             <a href="#/home">
                 <span class="glyphicon glyphicon-home" aria-hidden="true"></span>
                 Home
@@ -10,6 +11,7 @@
         </li>
 
         <li ng-class="{'active': model.$location.url() == '/profile'}" ng-show="currentUser">
+
             <a href="#/profile">
             <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
             Profile</a>
@@ -17,6 +19,7 @@
 
         <li ng-class="{'active': model.$location.url() == '/admin'}"
             ng-show="currentUser.roles.indexOf('admin') > -1">
+
             <a href="#/admin">
             <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
             Admin</a>

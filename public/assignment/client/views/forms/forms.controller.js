@@ -18,7 +18,7 @@
 
                 vm.forms = response;
 
-                console.log("Forms: ");
+                vm.$location = $location;
 
             });
         }
@@ -48,10 +48,9 @@
             FormService.updateFormById(form._id, form).then(function (response) {
 
                 if (response === "OK") {
+
                     FormService.findFormById(form._id).then(function(updatedForm) {
 
-                        console.log("Updated Form index: " + toBeUpdatedIndex);
-                        console.log(updatedForm);
                         vm.forms[toBeUpdatedIndex] = updatedForm;
                     });
                 }

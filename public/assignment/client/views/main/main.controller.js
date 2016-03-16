@@ -8,16 +8,20 @@
         .module("FormBuilderApp")
         .controller("MainController", MainController);
 
-    function MainController($location, $rootScope) {
+    function MainController($location, UserService) {
 
         var vm = this;
 
         function init() {
+            UserService.getCurrentUser().then(function (response) {
 
-            vm.$location = $location;
+                if(response.data) {
+
+                    UserService.setCurrentUser(response.data);
+
+                }
+            });
         }
         init();
-
-        $rootScope.currentUser = null;
     }
 })();

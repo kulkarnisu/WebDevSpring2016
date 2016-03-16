@@ -11,43 +11,69 @@
     function configuration($routeProvider) {
         $routeProvider
             .when("/home", {
+
                 templateUrl: "client/views/home/home.view.html",
-                controller: "HomeController"
+
+                controller: "HomeController",
+
+                controllerAs: "model"
             })
             .when("/login", {
+
                 templateUrl: "client/views/users/login.view.html",
+
                 controller: "LoginController",
+
                 controllerAs: "model"
             })
             .when("/profile", {
+
                 templateUrl: "client/views/users/profile.view.html",
+
                 controller: "ProfileController",
+
                 controllerAs: "model",
                 resolve: {
                     checkLoggedIn: checkLoggedIn
                 }
             })
             .when("/register", {
+
                 templateUrl: "client/views/users/register.view.html",
+
                 controller: "RegisterController",
+
                 controllerAs: "model"
             })
             .when("/admin", {
+
                 templateUrl: "client/views/admin/admin.view.html",
+
                 controller: "AdminController",
+
                 controllerAs: "model"
             })
             .when("/fields", {
                 templateUrl: "client/views/forms/fields.view.html",
+
                 controller: "FieldsController",
+
                 controllerAs: "model"
             })
             .when("/forms", {
+
                 templateUrl: "client/views/forms/forms.view.html",
+
                 controller: "FormsController",
-                controllerAs: "model"
+
+                controllerAs: "model",
+
+                resolve: {
+                    checkLoggedIn: checkLoggedIn
+                }
             })
             .otherwise({
+
                 redirectTo: "/home"
             });
     }
