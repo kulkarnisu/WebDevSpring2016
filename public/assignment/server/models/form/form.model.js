@@ -28,8 +28,6 @@ module.exports = function() {
 
     function createForm(form) {
 
-        console.log(form);
-
         mock.push(form);
     }
 
