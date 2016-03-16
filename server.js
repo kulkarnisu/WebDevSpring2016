@@ -5,12 +5,20 @@ var app           = express();
 var bodyParser    = require('body-parser');
 var multer        = require('multer');
 var uuid          = require('node-uuid');
+var cookieParser  = require('cookie-parser');
+var session       = require('express-session');
 
 app.use(express.static(__dirname + '/public'));
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(multer());
+app.use(session({
+    resave: true,
+    saveUninitialized: true,
+    secret: "AAA"
+}));
+app.use(cookieParser());
 
 require("./public/assignment/server/app.js")(app, uuid);
 

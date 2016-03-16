@@ -129,7 +129,7 @@ module.exports = function() {
 
                     if (mock[i].fields[j]._id === fieldId) {
 
-                        return fields[j];
+                        return mock[i].fields[j];
                     }
                 }
             }

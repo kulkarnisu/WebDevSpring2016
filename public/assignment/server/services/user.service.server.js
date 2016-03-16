@@ -8,18 +8,25 @@ module.exports = function(app, userModel, uuid) {
     //creates a new user embedded in the body of the request, and responds with an array of all users
     app.post("/api/assignment/user", createUser);
 
+    //Return logged in user (possibly null)
+    app.get("/api/assignment/user/loggedin", loggedIn);
+
+    //Logout current user
+    app.post("/api/assignment/user/logout", logout);
+
+    //responds with a single user whose username property is equal to the username path parameter
+    //and its password is equal to the password path parameter
+    app.get("/api/assignment/user?username=:username&password=:password", findUserByCredentials);
+
+
+    //responds with a single user whose username property is equal to the username path parameter
+    app.get("/api/assignment/user?username=:username", findUserByUsername);
+
     //responds with an array of all users
     app.get("/api/assignment/user", findAllusers);
 
     //responds with a single user whose id property is equal to the id path parameter
     app.get("/api/assignment/user/:id", findUserById);
-
-    //responds with a single user whose username property is equal to the username path parameter
-    app.get("/api/assignment/user?username=:username", findUserByUsername);
-
-    //responds with a single user whose username property is equal to the username path parameter
-    //and its password is equal to the password path parameter
-    app.get("/api/assignment/user?username=:username&password=:password", findUserByCredentials);
 
     //updates an existing user whose id property is equal to the id path parameter.
     // The new properties are set to the values in the user object embedded in the HTTP request.
@@ -75,7 +82,22 @@ module.exports = function(app, userModel, uuid) {
 
         var credentials = {username: username, password: password};
 
-        res.json(userModel.findUserByCredentials(credentials));
+        var currentUser = userModel.findUserByCredentials(credentials);
+
+        req.session.currentUser = currentUser;
+
+        res.json(currentUser);
+    }
+
+    function loggedIn(req, res) {
+
+        res.json(req.session.currentUser);
+    }
+
+    function logout(req, res) {
+
+        req.session.destroy();
+        res.send(200);
     }
 
     function updateUserById(req, res) {

@@ -8,7 +8,7 @@
         .module("FormBuilderApp")
         .controller("LoginController", LoginController);
 
-    function LoginController($rootScope, UserService, $location) {
+    function LoginController(UserService, $location) {
 
         var vm = this;
 
@@ -19,11 +19,12 @@
             UserService.findUserByCredentials(user.username, user.password).then(isUserPresent);
         }
 
-        function isUserPresent(userFound) {
+        function isUserPresent(response) {
 
-            if(userFound) {
+            if(response) {
 
-                $rootScope.currentUser = userFound;
+                UserService.setCurrentUser(response);
+
                 $location.url("/profile");
             }
         }

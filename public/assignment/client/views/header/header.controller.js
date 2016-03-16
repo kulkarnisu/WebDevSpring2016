@@ -8,14 +8,19 @@
         .module("FormBuilderApp")
         .controller("HeaderController", HeaderController);
 
-    function HeaderController($rootScope) {
+    function HeaderController($rootScope, UserService, $location) {
 
         var vm = this;
 
         vm.logout = logout;
 
         function logout() {
-            delete $rootScope.currentUser;
+
+            UserService.logout().then(function(response) {
+
+                UserService.setCurrentUser(null);
+                $location.url("/home");
+            });
         }
     }
 })();

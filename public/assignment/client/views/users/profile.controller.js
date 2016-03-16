@@ -12,6 +12,11 @@
 
         var vm = this;
 
+        function init() {
+
+        }
+        init();
+
         vm.update = update;
 
         vm.user= {};
@@ -40,7 +45,7 @@
                     vm.user.lastName = updatedUser.lastName;
                     vm.user.email = updatedUser.email;
 
-                    $rootScope.currentUser = updatedUser;
+                    UserService.setCurrentUser(updatedUser);
                 });
             }
         }

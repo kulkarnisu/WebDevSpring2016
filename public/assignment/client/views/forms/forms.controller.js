@@ -36,7 +36,9 @@
         function addForm(form) {
 
             FormService.createFormForUser($rootScope.currentUser._id, form).then(function(response) {
+
                 vm.forms = response;
+
             });
             vm.form = {};
         }
@@ -59,8 +61,6 @@
         }
 
         function deleteForm($index) {
-
-            var formID = vm.forms[$index]._id;
 
             var formID = vm.forms[$index]._id;
 

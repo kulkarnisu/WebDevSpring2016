@@ -9,11 +9,16 @@
         .factory("FormService", FormService);
 
     function FormService($http, $q) {
+
         var api = {
             createFormForUser: createFormForUser,
+
             findAllFormsForUser: findAllFormsForUser,
+
             deleteFormById: deleteFormById,
+
             updateFormById: updateFormById,
+
             findFormById: findFormById
         };
         return api;
