@@ -34,9 +34,7 @@ module.exports = function (app, formModel, uuid) {
         var formId = parseInt(req.params.formId);
 
         field._id = parseInt(uuid.v4(), 16);
-
-        console.log("New Field ID: " + field._id);
-
+        
         formModel.createFieldForForm(formId, field);
 
         res.json(formModel.findAllFieldsForForm(formId));

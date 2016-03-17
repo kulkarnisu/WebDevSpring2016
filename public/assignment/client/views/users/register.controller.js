@@ -20,7 +20,8 @@
 
                 UserService.findUserByUsername(user.username).then(function (newUser) {
 
-                    $rootScope.currentUser = newUser;
+                    UserService.setCurrentUser(newUser);
+
                     $location.url("/profile");
                 });
             });
