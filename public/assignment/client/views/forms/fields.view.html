@@ -1,4 +1,4 @@
-<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2">
+<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2" xmlns="http://www.w3.org/1999/html">
     <h1 class="page-header">Forms</h1>
 
     <h2>Users</h2>
@@ -21,13 +21,63 @@
             <form action="" id="my-form">
 
                 <div class="row" ng-repeat="field in model.fields">
-                    <div class="form-group col-md-8">
-                        <label for="{{field._id}}">{{field.label}}</label>
-                        <input type="{{field.type}}" class="form-control" placeholder="{{field.placeholder}}" id="{{field._id}}">
+                    <div class="form-group col-md-8" ng-switch on="field.type">
+                        <!-- For text and date fields-->
+                        <div ng-switch-default>
+
+                            <label for="{{field._id}}">{{field.label}}</label>
+                            <input type="{{field.type}}" class="form-control"
+                                   placeholder="{{field.placeholder}}"
+                                   id="{{field._id}}">
+
+                        </div>
+
+                        <!--For dropdown fields-->
+                        <div ng-switch-when="OPTIONS">
+
+                            <label for="{{field._id}}">{{field.label}}</label>
+
+                            <select name="{{field.label}}" id="{{field._id}}" class="form-control">
+
+                                <option ng-repeat = "option in field.options"
+                                        value="{{option.value}}">{{option.label}}</option>
+
+                            </select>
+                        </div>
+
+                        <!--For Checkbox-->
+                        <div ng-switch-when="CHECKBOXES">
+
+                            <label for="{{field._id}}">{{field.label}}</label>
+
+                            <div ng-repeat = "option in field.options">
+                                <input
+                                        type="checkbox"
+                                        name="{{field.label}}"
+                                        value="{{option.value}}">
+                                {{option.label}}
+                                <br>
+                            </div>
+                        </div>
+
+                        <!--For radio buttons-->
+                        <div ng-switch-when="RADIOS">
+
+                            <label for="{{field._id}}">{{field.label}}</label>
+
+                            <div ng-repeat = "option in field.options">
+                                <input
+                                        type="radio"
+                                        name="{{field.label}}"
+                                        value="{{option.value}}">
+                                {{option.label}}
+                                <br>
+                            </div>
+                        </div>
+
                     </div>
                     <div class="col-md-4 text-center">
-                        <!--<span class="glyphicon glyphicon-pencil hover" ng-click="editField($index)"></span>-->
-                        <!--<span class="glyphicon glyphicon-plus hover"></span>-->
+                        <span class="glyphicon glyphicon-pencil hover" ng-click="editField($index)"></span>
                         <span class="glyphicon glyphicon-remove hover" ng-click="model.removeField($index)"></span>
                         <span class="glyphicon glyphicon-align-justify hover"></span>
                     </div>
@@ -40,11 +90,11 @@
                         <label>Add new field:</label>
 
                         <select name="new-field" id="new-field" class="form-control"
-                                ng-model="model.field.type"
+                                ng-model="model.fieldType"
                                 ng-options="option.name for option in model.options track by option.value"
                                 ng-init="model.options[0]">
 
-                            <option value="{{option.value}}" selected>{{option.name}}</option>
+                            <option value="{{option.value}}">{{option.name}}</option>
 
                         </select>
 
@@ -52,9 +102,7 @@
 
                     <div class="col-md-4 text-center">
 
-                        <span class="glyphicon glyphicon-pencil hover not-visible"></span>
-
-                        <span class="glyphicon glyphicon-plus hover"></span>
+                        <span class="glyphicon glyphicon-plus hover" ng-click="model.addField()"></span>
 
                         <span class="glyphicon glyphicon-remove hover not-visible"></span>
 

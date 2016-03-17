@@ -103,6 +103,10 @@ module.exports = function() {
 
             if (mock[i]._id === formId) {
 
+                if(!mock[i].fields) {
+                    mock[i].fields = [];
+                }
+
                 mock[i].fields.push(field);
                 break;
             }
@@ -110,6 +114,7 @@ module.exports = function() {
     }
 
     function findAllFieldsForForm (formId) {
+
         for (var i in mock) {
 
             if (mock[i]._id === formId) {

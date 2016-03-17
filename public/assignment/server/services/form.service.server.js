@@ -31,7 +31,7 @@ module.exports = function(app, formModel, uuid) {
         var userId = parseInt(req.params.userId);
 
         form.userId = userId;
-        form._id = parseInt(uuid.v4());
+        form._id = parseInt(uuid.v4(), 16);
 
         formModel.createForm(form);
         res.json(formModel.findAllFormsByUserId(userId));
@@ -51,14 +51,14 @@ module.exports = function(app, formModel, uuid) {
 
     function findFormById(req, res) {
 
-        var formId = parseInt(req.params.formId);
+        var formId = parseInt(req.params.formId, 16);
 
         res.json(formModel.findFormById(formId));
     }
 
     function updateFormById(req, res) {
 
-        var formId = parseInt(req.params.formId);
+        var formId = parseInt(req.params.formId, 16);
         var form = req.body;
 
         formModel.updateFormById(formId, form);
@@ -68,7 +68,7 @@ module.exports = function(app, formModel, uuid) {
 
     function deleteFormById(req, res) {
 
-        var formId = parseInt(req.params.formId);
+        var formId = parseInt(req.params.formId, 16);
 
         formModel.deleteFormById(formId);
 

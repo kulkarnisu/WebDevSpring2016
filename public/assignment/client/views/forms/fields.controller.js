@@ -13,12 +13,12 @@
         var vm = this;
 
         vm.fields = [];
+        vm.field = {}
 
         vm.options = [];
 
-        vm.field = {}
-
         vm.removeField = removeField;
+        vm.addField = addField;
 
         vm.oldIndex = -1;
 
@@ -67,6 +67,114 @@
                     });
                 }
             });
+        }
+
+        function addField() {
+
+            var fieldType = vm.fieldType.value;
+
+            switch (fieldType) {
+
+                case "sline-text":
+                    vm.field = createSingleLineField();
+                    break;
+
+                case "mline-text":
+                    vm.field = createMultiLineField();
+                    break;
+
+                case "date":
+                    vm.field = createDateField();
+                    break;
+
+                case "dropdown":
+                    vm.field = createDropDownField();
+                    break;
+
+                case "checkbox":
+                    vm.field = createCheckboxField();
+                    break;
+
+                case "radio":
+                    vm.field = createRadioField();
+                    break;
+
+            }
+
+            FieldService.createFieldForForm(formId, vm.field).then(function (response) {
+
+                vm.fields = response;
+                vm.field = {};
+            });
+
+        }
+
+        function createSingleLineField() {
+
+            var field = {
+                _id: null,
+                label: "New Text Field",
+                type: "TEXT",
+                placeholder: "New Field"
+            };
+
+            return field;
+        }
+
+        function createMultiLineField() {
+
+            var field = {
+                _id: null,
+                label: "New Text Field",
+                type: "TEXTAREA",
+                placeholder: "New Field"
+            };
+
+            return field;
+        }
+
+        function createDateField() {
+
+            var field = {
+                _id: null,
+                label: "New Date Field",
+                type: "DATE"
+            };
+
+            return field;
+        }
+
+        function createDropDownField() {
+
+            var field = {"_id": null, "label": "New Dropdown", "type": "OPTIONS", "options": [
+                {"label": "Option 1", "value": "OPTION_1"},
+                {"label": "Option 2", "value": "OPTION_2"},
+                {"label": "Option 3", "value": "OPTION_3"}
+            ]};
+
+            return field;
+        }
+
+        function createCheckboxField() {
+
+            var field = {"_id": null, "label": "New Checkboxes", "type": "CHECKBOXES", "options": [
+                {"label": "Option A", "value": "OPTION_A"},
+                {"label": "Option B", "value": "OPTION_B"},
+                {"label": "Option C", "value": "OPTION_C"}
+            ]};
+
+            return field;
+        }
+
+        function createRadioField() {
+
+            var field = {"_id": null, "label": "New Radio Buttons", "type": "RADIOS", "options": [
+                {"label": "Option X", "value": "OPTION_X"},
+                {"label": "Option Y", "value": "OPTION_Y"},
+                {"label": "Option Z", "value": "OPTION_Z"}
+            ]};
+
+            return field;
         }
     }
 })();
