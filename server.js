@@ -16,8 +16,6 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(multer());
 
-console.log(process.env.PASSPORT_SECRET);
-
 app.use(session({
     resave: true,
     saveUninitialized: true,
