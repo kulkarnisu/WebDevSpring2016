@@ -19,10 +19,11 @@ app.use(multer());
 app.use(session({
     resave: true,
     saveUninitialized: true,
-    secret: "AAA"
+    secret: process.env.PASSPORT_SECRET
 }));
 
 app.use(cookieParser());
+
 
 require("./public/assignment/server/app.js")(app, uuid);
 
