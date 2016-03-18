@@ -66,6 +66,7 @@
                 }
             })
             .when("/form/:formId/fields", {
+                
                 templateUrl: "client/views/forms/fields.view.html",
 
                 controller: "FieldsController",

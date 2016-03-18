@@ -18,9 +18,10 @@
 
             </ul>
 
-            <form action="" id="my-form">
+            <form action="" id="my-form" field-sortable field-axis="y">
 
                 <div class="row" ng-repeat="field in model.fields">
+
                     <div class="form-group col-md-8" ng-switch on="field.type">
                         <!-- For text and date fields-->
                         <div ng-switch-default>

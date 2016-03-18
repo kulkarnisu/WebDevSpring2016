@@ -14,14 +14,6 @@ module.exports = function(app, userModel, uuid) {
     //Logout current user
     app.post("/api/assignment/user/logout", logout);
 
-    //responds with a single user whose username property is equal to the username path parameter
-    //and its password is equal to the password path parameter
-    app.get("/api/assignment/user?username=:username&password=:password", findUserByCredentials);
-
-
-    //responds with a single user whose username property is equal to the username path parameter
-    app.get("/api/assignment/user?username=:username", findUserByUsername);
-
     //responds with an array of all users
     app.get("/api/assignment/user", findAllusers);
 

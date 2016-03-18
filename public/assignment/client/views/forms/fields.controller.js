@@ -8,7 +8,7 @@
         .module("FormBuilderApp")
         .controller("FieldsController", FieldsController);
 
-    function FieldsController(FieldService, $routeParams, $location) {
+    function FieldsController(FieldService, $routeParams, $location, $scope) {
 
         var vm = this;
 
@@ -33,6 +33,7 @@
                 FieldService.getFieldsForForm(formId).then(function (response) {
 
                     vm.fields = response;
+                    $scope.fields = vm.fields;
 
                 });
 
@@ -63,6 +64,7 @@
                     FieldService.getFieldsForForm(formId).then(function (response) {
 
                         vm.fields = response;
+                        $scope.fields = vm.fields;
 
                     });
                 }
@@ -104,6 +106,7 @@
             FieldService.createFieldForForm(formId, vm.field).then(function (response) {
 
                 vm.fields = response;
+                $scope.fields = vm.fields;
                 vm.field = {};
             });
 

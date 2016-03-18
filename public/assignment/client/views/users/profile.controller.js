@@ -14,18 +14,16 @@
 
         function init() {
 
+            vm.user= {};
+
+            vm.user.username = $rootScope.currentUser.username;
+            vm.user.password = $rootScope.currentUser.password;
+            vm.user.email = $rootScope.currentUser.email;
+            vm.user.firstName = $rootScope.currentUser.firstName;
+            vm.user.lastName = $rootScope.currentUser.lastName;
+            
         }
         init();
-
-        vm.update = update;
-
-        vm.user= {};
-
-        vm.user.username = $rootScope.currentUser.username;
-        vm.user.password = $rootScope.currentUser.password;
-        vm.user.email = $rootScope.currentUser.email;
-        vm.user.firstName = $rootScope.currentUser.firstName;
-        vm.user.lastName = $rootScope.currentUser.lastName;
 
         vm.update = update;
 
