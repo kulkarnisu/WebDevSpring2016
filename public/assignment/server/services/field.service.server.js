@@ -49,17 +49,19 @@ module.exports = function (app, formModel, uuid) {
 
     function findFieldByFieldIdAndFormId(req, res) {
 
-        var formId = parseInt(req.params.formId, 16);
-        var fieldId = parseInt(req.params.fieldId, 16   );
+        var formId = parseInt(req.params.formId);
+        var fieldId = parseInt(req.params.fieldId);
 
         res.json(formModel.findFieldByFieldIdAndFormId(formId, fieldId));
     }
 
     function updateFieldByFieldIdAndFormId (req, res) {
 
-        var formId = parseInt(req.params.formId, 16);
-        var fieldId = parseInt(req.params.fieldId, 16);
+        var formId = parseInt(req.params.formId);
+        var fieldId = parseInt(req.params.fieldId);
         var field = req.body;
+
+        formModel.updateFieldByFieldIdAndFormId(formId, fieldId, field);
 
        res.send(200);
     }

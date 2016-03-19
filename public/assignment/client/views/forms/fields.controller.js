@@ -8,7 +8,7 @@
         .module("FormBuilderApp")
         .controller("FieldsController", FieldsController);
 
-    function FieldsController(FieldService, $routeParams, $location, $scope) {
+    function FieldsController(FieldService, $routeParams, $location, $scope, $uibModal, $log) {
 
         var vm = this;
 
@@ -19,6 +19,7 @@
 
         vm.removeField = removeField;
         vm.addField = addField;
+        vm.editField = editField;
 
         vm.oldIndex = -1;
 
@@ -179,5 +180,102 @@
 
             return field;
         }
+
+        $scope.items = ['item1', 'item2', 'item3'];
+
+        function editField($index) {
+
+            vm.fieldToBeEdited = vm.fields[$index];
+
+            var modalInstance = $uibModal.open( {
+
+                templateUrl: 'fieldEditModal.html',
+
+                controller: 'ModalInstanceCtrl',
+
+                resolve: {
+                    field: function () {
+
+                        return vm.fieldToBeEdited;
+                    }
+                }
+
+            });
+
+            modalInstance.result.then(function (field) {
+
+                FieldService.updateField(formId, field._id, field).then(function (response) {
+
+                    if(response === "OK") {
+
+                        FieldService.getFieldsForForm(formId).then(function (response) {
+
+                            vm.fields = response;
+                            $scope.fields = vm.fields;
+
+                        });
+
+                    }
+                });
+                
+            });
+        }
     }
+
+    angular.module('FormBuilderApp').controller('ModalInstanceCtrl', function ($scope, $uibModalInstance, field) {
+
+        $scope.field = field;
+
+        $scope.ok = function () {
+
+            if($scope.newLabel) {
+                $scope.field.label = $scope.newLabel;
+            }
+
+            if($scope.field.type != "DATE") {
+
+                if($scope.newPlaceholder) {
+
+                    if($scope.field.type === "TEXT" || $scope.field.type === "TEXTAREA") {
+
+                        $scope.field.placeholder = $scope.newPlaceholder;
+
+                    } else {
+
+                        UpdateOtherFields();
+                    }
+                }
+
+            }
+
+            function UpdateOtherFields() {
+
+                var content = $scope.newPlaceholder;
+
+                content = content.trim();
+
+                var rawOptions = content.split("\n");
+
+                var options = [];
+
+                for (var i in rawOptions) {
+
+                    var rawField = rawOptions[i].split(":");
+
+                    var option = {label: rawField[0], value: rawField[1]};
+
+                    options.push(option);
+                }
+
+                $scope.field.options = options;
+
+            }
+
+            $uibModalInstance.close($scope.field);
+        };
+
+        $scope.cancel = function () {
+            $uibModalInstance.dismiss('cancel');
+        };
+    });
 })();
