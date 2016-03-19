@@ -45,16 +45,18 @@
 
         function updateForm(form) {
 
-            FormService.updateFormById(form._id, form).then(function (response) {
+            FormService.updateFormById(form._id, form)
+                .then(function (response) {
 
-                if (response === "OK") {
+                    if (response === "OK") {
 
-                    FormService.findFormById(form._id).then(function(updatedForm) {
+                        return FormService.findFormById(form._id);
+                    }
+                })
+                .then(function(updatedForm) {
 
-                        vm.forms[toBeUpdatedIndex] = updatedForm;
-                    });
-                }
-            });
+                    vm.forms[toBeUpdatedIndex] = updatedForm;
+                });
 
             vm.form={};
         }

@@ -202,23 +202,22 @@
 
             });
 
-            modalInstance.result.then(function (field) {
-
-                FieldService.updateField(formId, field._id, field).then(function (response) {
-
+            modalInstance.result
+                .then(function (field) {
+                    return FieldService.updateField(formId, field._id, field);
+                
+                })
+                .then(function (response) {
                     if(response === "OK") {
-
-                        FieldService.getFieldsForForm(formId).then(function (response) {
-
-                            vm.fields = response;
-                            $scope.fields = vm.fields;
-
-                        });
+                        return FieldService.getFieldsForForm(formId);
 
                     }
+                })
+                .then(function (response) {
+                    vm.fields = response;
+                    $scope.fields = vm.fields;
+
                 });
-                
-            });
         }
     }
 
