@@ -33,7 +33,7 @@ module.exports = function(app, connectionModel, uuid) {
         connection.userId = userId;
         connection._id = parseInt(uuid.v4(), 16);
 
-        connectionModel.createConnection(connection);
+        connectionModel.addConnection(connection);
 
         res.json(connectionModel.findAllConnectionsByUserId(userId));
     }

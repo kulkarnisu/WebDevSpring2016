@@ -46,6 +46,7 @@
         function updateForm(form) {
 
             FormService.updateFormById(form._id, form)
+                
                 .then(function (response) {
 
                     if (response === "OK") {
@@ -53,6 +54,7 @@
                         return FormService.findFormById(form._id);
                     }
                 })
+
                 .then(function(updatedForm) {
 
                     vm.forms[toBeUpdatedIndex] = updatedForm;
@@ -68,6 +70,7 @@
             FormService.deleteFormById(formID).then(function(response) {
 
                 if(response === "OK") {
+
                     init();
                 }
             });

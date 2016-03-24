@@ -67,12 +67,12 @@ module.exports = function() {
 
     function updateConnectionById(connectionId, newConnection) {
 
-        for(var i = 0; i < connections.length; i++) {
+        for(var i in mock) {
 
             if(mock[i]._id == connectionId) {
 
                 mock[i] = {
-
+                    _id: newConnection._id,
                     name : newConnection.name,
                     db : newConnection.db,
                     username: newConnection.username,
