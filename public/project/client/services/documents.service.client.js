@@ -80,7 +80,7 @@
         function updateDocumentById(documentId, newDocument, callback) {
             for(var i = 0; i < documents.length; i++) {
                 if(documents[i]._id ===  documentId) {
-                    documents[i] = newDocument;
+                    documents[i].name = newDocument.name;
                     callback(newDocument);
                 }
             }

@@ -20,8 +20,8 @@
                 templateUrl: "client/views/users/register.view.html",
                 controller: "RegController"
             })
-            .when("/connections", {
-                templateUrl: "client/views/connections/connections.view.html",
+            .when("/connection", {
+                templateUrl: "client/views/connection/connection.view.html",
                 controller: "ConnectionsController"
             })
             .when("/collections/:id", {
