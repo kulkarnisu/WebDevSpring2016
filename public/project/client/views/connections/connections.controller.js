@@ -89,6 +89,7 @@
                 .then(function (response) {
 
                     vm.connections[toBeUpdatedIndex] = response;
+                    vm.connection = {};
 
                 });
         }

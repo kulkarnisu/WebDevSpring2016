@@ -78,7 +78,8 @@ module.exports = function() {
                     username: newConnection.username,
                     host : newConnection.host,
                     port : newConnection.port,
-                    userId : newConnection.userId
+                    userId : newConnection.userId,
+                    password: newConnection.password
 
                 }
 
