@@ -25,7 +25,7 @@ app.use(session({
 app.use(cookieParser());
 
 
-require("./public/assignment/server/app.js")(app, uuid);
+var assignmentApp = require("./public/assignment/server/app.js")(app, uuid);
 
 var ipaddress = process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1';
 var port = process.env.OPENSHIFT_NODEJS_PORT || 3000;
