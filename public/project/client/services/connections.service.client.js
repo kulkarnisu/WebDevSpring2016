@@ -3,12 +3,13 @@
  */
 (function() {
     angular
-        .module("ConnectionBuilderApp")
+        .module("FormBuilderApp")
         .factory("ConnectionsService", ConnectionsService);
 
-    function ConnectionsService() {
+    function ConnectionsService($q, $http) {
 
         var api = {
+            
             createConnectionForUser: createConnectionForUser,
 
             findAllConnectionsForUser: findAllConnectionsForUser,
