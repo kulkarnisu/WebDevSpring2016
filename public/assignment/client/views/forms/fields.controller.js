@@ -181,7 +181,6 @@
             return field;
         }
 
-        $scope.items = ['item1', 'item2', 'item3'];
 
         function editField($index) {
 
