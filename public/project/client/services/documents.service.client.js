@@ -8,143 +8,134 @@
         .module("FormBuilderApp")
         .factory("DocumentsService", documentsService);
 
-    var documents = [
-        {
-            _id: 212,
-            name: "Mydoc",
-            collectionId: 12143,
-            movieName: "Avatar",
-            director: "James Cameron",
-            year: 2000
-        },
-
-        {
-            _id: 213,
-            name: "MyDoc2",
-            collectionId: 12144,
-            movieName: "Deadpool",
-            director: "Ryan Reynolds",
-            year: 2016
-        }
-    ];
-
-    function documentsService() {
+    function documentsService($q, $http) {
 
         var api = {
             createDocumentForCollection: createDocumentForCollection,
             findAllDocumentsForCollection: findAllDocumentsForCollection,
+            findDocumentById: findDocumentById,
             deleteDocumentById: deleteDocumentById,
             updateDocumentById: updateDocumentById,
 
             getProperties: getAllProperties,
-            getDocumentById: getDocumentById,
             createDocumentProp: createDocumentProp,
             deleteProperty: deleteProperty,
             updateProperty: updateProperty
         };
         return api;
 
-        function createDocumentForCollection(collectionId, document, callback) {
-            document._id = Math.floor(Math.random() * 900) + 100;
-            document.collectionId = collectionId;
-            documents.push(document);
-            console.log(documents);
-            callback(document);
+        function createDocumentForCollection(collectionId, document) {
+
+            var deferred = $q.defer();
+            var url = "/api/project/collection/" + collectionId + "/document";
+            $http.post(url, document).success (function (response) {
+                deferred.resolve(response);
+            });
+            return deferred.promise;
         }
 
-        function findAllDocumentsForCollection(collectionId, callback) {
-            var documentsForCollection = [];
-            for(var i = 0; i < documents.length; i++) {
-                if(documents[i].collectionId === collectionId){
-                    documentsForCollection.push(documents[i]);
-                }
-            }
-            callback(documentsForCollection)
+        function findAllDocumentsForCollection(collectionId) {
+
+            var deferred = $q.defer();
+            var url = "/api/project/collection/" + collectionId + "/document";
+            $http.get(url).success (function (response) {
+                deferred.resolve(response);
+            });
+            return deferred.promise;
         }
 
-        function deleteDocumentById(documentId, callback) {
-            var indexToRemove = -1;
-            for(var i = 0 ; i < documents.length; i++) {
-                if(documents[i]._id === documentId) {
-                    indexToRemove = i;
-                }
-            }
+        function findDocumentById(documentId) {
 
-            if(indexToRemove > -1) {
-                documents.splice(indexToRemove, 1);
-            }
-
-            callback(documents);
+            var deferred = $q.defer();
+            var url = "/api/project/collection/document/" + documentId;
+            $http.get(url).success (function (response) {
+                deferred.resolve(response);
+            });
+            return deferred.promise;
         }
 
-        function updateDocumentById(documentId, newDocument, callback) {
-            for(var i = 0; i < documents.length; i++) {
-                if(documents[i]._id ===  documentId) {
-                    documents[i].name = newDocument.name;
-                    callback(newDocument);
-                }
-            }
+        function deleteDocumentById(documentId) {
+
+            var deferred = $q.defer();
+            var url = "/api/project/collection/document/" + documentId;
+            $http.delete(url).success (function (response) {
+                deferred.resolve(response);
+            });
+            return deferred.promise;
         }
 
-        function getAllProperties(documentId, callback) {
-            var prop = [];
-            var doc = null;
-            for (var i = 0; i < documents.length;i++) {
-                if (documents[i]._id === documentId) {
-                    doc = documents[i];
-                    break;
-                }
-            }
+        function updateDocumentById(documentId, newDocument) {
 
-            for(var p in doc) {
-                if(p != "_id" && p != "name" && p != "collectionId" && p!= "$$hashKey") {
-                    prop.push(p);
-                }
-            }
-
-            console.log("In Service properties: " + prop);
-            callback(prop);
+            var deferred = $q.defer();
+            var url = "/api/project/collection/document/" + documentId;
+            $http.put(url, newDocument).success (function (response) {
+                deferred.resolve(response);
+            });
+            return deferred.promise;
         }
 
-        function getDocumentById(docId, callback) {
-            for (var i = 0; i < documents.length;i++) {
-                if (documents[i]._id === docId) {
-                    callback(documents[i]);
-                    break;
-                }
-            }
+        function getAllProperties(documentId) {
+
+            var deferred = $q.defer();
+
+            var url = "/api/project/document/:documentId/data";
+            url = url.replace(":documentId", documentId);
+
+            $http.get(url).success(function (response) {
+
+                deferred.resolve(response);
+            });
+
+            return deferred.promise;
         }
 
-        function createDocumentProp(docId, prop, callback) {
-            for(var i = 0; i < documents.length; i++) {
-                if(documents[i]._id === docId) {
-                    documents[i][prop.name] = prop.value;
-                    callback(documents[i]);
-                    break;
-                }
-            }
+
+        function createDocumentProp(docId, prop) {
+
+            var deferred = $q.defer();
+
+            var url = "/api/project/document/:documentId/data";
+            url = url.replace(":documentId", docId);
+
+            $http.post(url, prop).success(function (response) {
+
+                deferred.resolve(response);
+            });
+
+            return deferred.promise;
         }
 
         function deleteProperty(docId, propName, callback) {
-            for(var i = 0; i < documents.length; i++) {
-                if(documents[i]._id === docId) {
-                    delete documents[i][propName];
-                    callback(documents[i]);
-                    break;
-                }
-            }
+
+            var deferred = $q.defer();
+
+            var url = "/api/project/document/:documentId/data/:name";
+            url = url.replace(":documentId", docId);
+            url = url.replace(":name", propName);
+
+            $http.delete(url).success(function (response) {
+
+                deferred.resolve(response);
+            });
+
+            return deferred.promise;
+
         }
 
-        function updateProperty(docId, prop, callback) {
-            var docToBeReturned = null;
-            for(var i = 0; i < documents.length; i++) {
-                if (documents[i]._id === docId) {
-                    documents[i][prop.name] = prop.value;
-                    docToBeReturned = documents[i];
-                    break;
-                }
-            }
-            callback(docToBeReturned);
+        function updateProperty(docId, prop) {
+
+            var deferred = $q.defer();
+
+            var url = "/api/project/document/:documentId/data";
+            url = url.replace(":documentId", docId);
+
+            $http.put(url, prop).success(function (response) {
+
+                deferred.resolve(response);
+            });
+
+            return deferred.promise;
+
         }
 
     }

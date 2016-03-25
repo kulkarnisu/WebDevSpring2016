@@ -27,15 +27,18 @@
             })
             .when("/collections/:id", {
                 templateUrl: "client/views/collections/collections.view.html",
-                controller: "CollectionsController"
+                controller: "CollectionsController",
+                controllerAs: "model"
             })
             .when("/documents/:id", {
                 templateUrl: "client/views/documents/documents.view.html",
-                controller: "DocumentsController"
+                controller: "DocumentsController",
+                controllerAs: "model"
             })
             .when("/data/:id", {
                 templateUrl: "client/views/data/data.view.html",
-                controller: "DataController"
+                controller: "DataController",
+                controllerAs: "model"
             })
             .otherwise({
                 redirectTo: "/home",
