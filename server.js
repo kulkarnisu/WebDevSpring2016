@@ -7,6 +7,11 @@ var multer        = require('multer');
 var uuid          = require('node-uuid');
 var cookieParser  = require('cookie-parser');
 var session       = require('express-session');
+var mongoose      = require('mongoose');
+
+var connectionString = 'mongodb://127.0.0.1:27017/form_app';
+
+var db = mongoose.connect(connectionString);
 
 app.use(express.static(__dirname + '/public'));
 
@@ -24,8 +29,7 @@ app.use(session({
 
 app.use(cookieParser());
 
-
-var assignmentApp = require("./public/assignment/server/app.js")(app, uuid);
+var assignmentApp = require("./public/assignment/server/app.js")(app, db, mongoose, uuid);
 
 var formApp = require("./public/project/server/app.js")(app, uuid);
 
