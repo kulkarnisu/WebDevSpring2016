@@ -3,8 +3,6 @@
  */
 "use strict"
 
-var mock = require("./user.mock.json");
-
 module.exports = function(db, mongoose) {
 
     var userSchema = require("./user.schema.server.js")(mongoose);

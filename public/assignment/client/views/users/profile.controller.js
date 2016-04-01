@@ -16,11 +16,21 @@
 
             vm.user= {};
 
-            vm.user.username = $rootScope.currentUser.username;
+            UserService.findUserById($rootScope.currentUser._id)
+
+                .then(
+
+                    function (res) {
+
+                        vm.user = res;
+                    }
+                );
+
+            /*vm.user.username = $rootScope.currentUser.username;
             vm.user.password = $rootScope.currentUser.password;
             vm.user.email = $rootScope.currentUser.email;
             vm.user.firstName = $rootScope.currentUser.firstName;
-            vm.user.lastName = $rootScope.currentUser.lastName;
+            vm.user.lastName = $rootScope.currentUser.lastName;*/
             
         }
         init();
@@ -34,7 +44,7 @@
 
         function updateProfilePage(response) {
 
-            if (response === "OK") {
+            if (response === "Updated") {
 
                 UserService.findUserById($rootScope.currentUser._id).then (function (updatedUser) {
 

@@ -104,12 +104,23 @@
 
             }
 
-            FieldService.createFieldForForm(formId, vm.field).then(function (response) {
+            FieldService.createFieldForForm(formId, vm.field)
 
-                vm.fields = response;
-                $scope.fields = vm.fields;
-                vm.field = {};
-            });
+                .then(function (response) {
+
+                    if(response === "Created") {
+                        return  FieldService.getFieldsForForm(formId);
+                    }
+                })
+                
+                .then(
+
+                    function (response) {
+
+                        vm.fields = response;
+                        $scope.fields = vm.fields;
+                    }
+                )
 
         }
 
