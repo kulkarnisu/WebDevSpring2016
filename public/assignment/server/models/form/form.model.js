@@ -1,19 +1,13 @@
 /**
  * Created by sudeep on 3/13/16.
  */
-"use strict"
-
-var mock = require("./form.mock.json");
+"use strict";
 
 module.exports = function(db, mongoose) {
 
     var formSchema = require("./form.schema.server")(mongoose);
 
     var formModel = mongoose.model("Form", formSchema);
-
-    var fieldSchema = require("./field.schema.server")(mongoose);
-
-    var fieldModel = mongoose.model("Field", fieldSchema);
 
     var api = {
 
@@ -25,13 +19,7 @@ module.exports = function(db, mongoose) {
         updateFormById: updateFormById,
         deleteFormById: deleteFormById,
         findFormByTitle: findFormByTitle,
-
-        //Field
-        createFieldForForm: createFieldForForm,
-        findAllFieldsForForm: findAllFieldsForForm,
-        findFieldByFieldIdAndFormId: findFieldByFieldIdAndFormId,
-        updateFieldByFieldIdAndFormId: updateFieldByFieldIdAndFormId,
-        deleteFieldByFieldIdAndFormId: deleteFieldByFieldIdAndFormId
+        getMongooseModel: getMongooseModel
     };
 
     return api;
@@ -69,6 +57,11 @@ module.exports = function(db, mongoose) {
     function findFormByTitle(formTitle) {
 
         return formModel.findOne({title: formTitle});
+    }
+
+    function getMongooseModel() {
+
+        return formModel;
     }
 
     function createFieldForForm(formId, field) {
