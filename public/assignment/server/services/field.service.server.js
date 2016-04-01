@@ -120,34 +120,6 @@ module.exports = function (app, fieldModel) {
 
         fieldModel.updateFieldByFieldIdAndFormId(formId, fieldId, field)
 
-            /*.then(
-
-                function (form) {
-
-                    return form.update(
-                        {
-                            "fields._id": fieldId
-                        },
-
-                        {
-                            "$push": {
-                                "fields.$": field
-                            }
-                        }
-                    );
-
-                },
-
-                function (err) {
-
-                    console.log("Error");
-                    console.log(err);
-
-                    return null;
-
-                }
-            )*/
-
             .then(
 
                 function (doc) {

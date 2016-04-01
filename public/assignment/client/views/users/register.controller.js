@@ -16,6 +16,8 @@
 
         function register(user) {
 
+            user.emails = user.emails.trim().split(",");
+
             UserService.createUser(user).then(function(users) {
 
                 UserService.findUserByUsername(user.username).then(function (newUser) {

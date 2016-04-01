@@ -23,14 +23,11 @@
                     function (res) {
 
                         vm.user = res;
+
+                        vm.user.emails = vm.user.emails.join(",");
+                        vm.user.phones = vm.user.phones.join(",s");
                     }
                 );
-
-            /*vm.user.username = $rootScope.currentUser.username;
-            vm.user.password = $rootScope.currentUser.password;
-            vm.user.email = $rootScope.currentUser.email;
-            vm.user.firstName = $rootScope.currentUser.firstName;
-            vm.user.lastName = $rootScope.currentUser.lastName;*/
             
         }
         init();
@@ -38,6 +35,9 @@
         vm.update = update;
 
         function update(user) {
+
+            user.emails = user.emails.trim().split(",");
+            user.phones = user.phones.trim().split(",");
 
             UserService.updateUser($rootScope.currentUser._id, user).then(updateProfilePage);
         }
@@ -51,7 +51,7 @@
                     vm.user.username = updatedUser.username;
                     vm.user.firstName = updatedUser.firstName;
                     vm.user.lastName = updatedUser.lastName;
-                    vm.user.email = updatedUser.email;
+                    vm.user.emails = updatedUser.emails;
 
                     UserService.setCurrentUser(updatedUser);
                 });

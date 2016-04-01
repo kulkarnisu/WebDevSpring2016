@@ -57,12 +57,7 @@ module.exports = function(db, mongoose, formModel) {
             .then(
 
                 function (form) {
-
-                    /*return form.update( {
-                     $pull: {
-                     'fields': {_id: fieldId}
-                     }
-                     });*/
+                    
                     form.fields.id(fieldId).remove();
                     return form.save();
 
