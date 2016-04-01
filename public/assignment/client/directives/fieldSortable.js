@@ -33,7 +33,7 @@
                     var temp = scope.model.fields[start];
                     scope.model.fields[start] = scope.model.fields[end];
                     scope.model.fields[end] = temp;
-                    scope.model.$apply();
+                    scope.$apply();
                 }
             });
         }

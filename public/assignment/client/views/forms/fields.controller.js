@@ -49,7 +49,9 @@
                 {name: "Date Field", value: "date"},
                 {name: "Dropdown Field", value: "dropdown"},
                 {name: "Checkboxes Field", value: "checkbox"},
-                {name: "Radio Buttons Field", value: "radio"}
+                {name: "Radio Buttons Field", value: "radio"},
+                {name: "Password Field", value: "password"},
+                {name: "Email Field", value: "email"}
             ];
         }
         init();
@@ -79,7 +81,7 @@
             switch (fieldType) {
 
                 case "sline-text":
-                    vm.field = createSingleLineField();
+                    vm.field = createSingleLineField("TEXT");
                     break;
 
                 case "mline-text":
@@ -102,13 +104,19 @@
                     vm.field = createRadioField();
                     break;
 
+                case "email":
+                    vm.field = createSingleLineField("EMAIL");
+                    break;
+
+                case "password":
+                    vm.field = createSingleLineField("PASSWORD");
+                    break;
+
             }
 
             FieldService.createFieldForForm(formId, vm.field)
 
                 .then(function (response) {
-
-                    console.log(response);
 
                     if(response === "Created") {
                         return  FieldService.getFieldsForForm(formId);
@@ -126,12 +134,12 @@
 
         }
 
-        function createSingleLineField() {
+        function createSingleLineField(type) {
 
             var field = {
-                label: "New Text Field",
-                type: "TEXT",
-                placeholder: "New Field"
+                label: "New " + type.toLowerCase() + " Field",
+                type: type,
+                placeholder: "New " + type.toLowerCase() + " Field"
             };
 
             return field;
@@ -240,6 +248,7 @@
         $scope.ok = function () {
 
             if($scope.newLabel) {
+
                 $scope.field.label = $scope.newLabel;
             }
 
@@ -247,7 +256,8 @@
 
                 if($scope.newPlaceholder) {
 
-                    if($scope.field.type === "TEXT" || $scope.field.type === "TEXTAREA") {
+                    if($scope.field.type === "TEXT" || $scope.field.type === "TEXTAREA"
+                        || $scope.field.type === "EMAIL" || $scope.field.type === "PASSWORD ") {
 
                         $scope.field.placeholder = $scope.newPlaceholder;
 
