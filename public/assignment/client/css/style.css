@@ -58,3 +58,7 @@ table.thick-top-border{
     color: #fff;
     background-color: #373a3c;
 }
+
+.top-pad {
+    padding-top: 26px;
+}

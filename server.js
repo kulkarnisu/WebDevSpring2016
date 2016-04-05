@@ -38,7 +38,7 @@ app.use(session({
 
 app.use(cookieParser());
 
-var assignmentApp = require("./public/assignment/server/app.js")(app, db, mongoose, uuid);
+var assignmentApp = require("./public/assignment/server/app.js")(app, db, mongoose);
 
 var formApp = require("./public/project/server/app.js")(app, uuid);
 
