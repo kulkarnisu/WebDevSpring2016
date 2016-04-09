@@ -12,15 +12,27 @@
     function UserService($http, $q, $rootScope) {
 
         var service = {
+
             login: login,
+
             findUserByUsername: findUserByUsername,
+
             findAllUsers: findAllUsers,
+
+            register: register,
+
             createUser: createUser,
+
             deleteUserById: deleteUserById,
+
             updateUser: updateUser,
+
             findUserById: findUserById,
+
             getCurrentUser: getCurrentUser,
+
             setCurrentUser: setCurrentUser,
+                
             logout: logout
         };
         return service;
@@ -45,13 +57,26 @@
             return deferred.promise;
         }
 
-        function findAllUsers(callback) {
+        function findAllUsers() {
 
             var deferred = $q.defer();
 
             var url = "/api/assignment/user";
 
             $http.get(url).success (function (response) {
+                deferred.resolve(response);
+            });
+
+            return deferred.promise;
+        }
+
+        function register(user) {
+
+            var deferred = $q.defer();
+
+            var url = "/api/assignment/register";
+
+            $http.post(url, user).success (function (response) {
                 deferred.resolve(response);
             });
 

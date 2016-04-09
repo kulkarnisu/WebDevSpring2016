@@ -13,8 +13,11 @@ module.exports = function(app, userModel, uuid) {
 
     var auth = authorized;
 
-    //creates a new user embedded in the body of the request, and responds with an array of all users
-    app.post("/api/assignment/user",  createUser);
+    //Registers a new user embedded in the body of the request, and responds with an array of all users
+    app.post("/api/assignment/register",  register);
+
+    //Creates a new user embedded in the body of the request, and responds with an array of all users
+    app.post("/api/assignment/user", auth, createUser);
 
     //Return logged in user (possibly null)
     app.get("/api/assignment/user/loggedin", loggedIn);
@@ -45,7 +48,71 @@ module.exports = function(app, userModel, uuid) {
     passport.deserializeUser(deserializeUser);
 
 
-    function createUser (req, res) {
+    function createUser(req, res) {
+
+        var newUser = req.body;
+
+        if(newUser.roles && newUser.roles.length > 1) {
+            newUser.roles = newUser.roles.split(",");
+
+        } else {
+
+            newUser.roles = ["student"];
+        }
+
+        // first check if a user already exists with the username
+        userModel
+            .findUserByUsername(newUser.username)
+            .then(
+
+                function(user){
+
+                    // if the user does not already exist
+                    if(user == null) {
+
+                        newUser.password = bcrypt.hashSync(newUser.password);
+                        // create a new user
+                        return userModel.createUser(newUser)
+
+                            .then(
+
+                                // fetch all the users
+                                function(){
+
+                                    return userModel.findAllUsers();
+                                },
+
+                                function(err){
+
+                                    res.status(400).send(err);
+                                }
+                            );
+                        // if the user already exists, then just fetch all the users
+                    } else {
+
+                        return userModel.findAllUsers();
+                    }
+                },
+
+                function(err){
+
+                    res.status(400).send(err);
+                }
+            )
+            .then(
+
+                function(users){
+
+                    res.json(users);
+                },
+                function(){
+
+                    res.status(400).send(err);
+                }
+            )
+    }
+
+    function register (req, res) {
 
         var newUser = req.body;
         newUser.roles = ['student'];
@@ -107,7 +174,29 @@ module.exports = function(app, userModel, uuid) {
 
             if(isAdmin(req.user)) {
 
-                res.json(userModel.findAllUsers());
+                userModel.findAllUsers()
+                
+                    .then(
+                        
+                        function (users) {
+
+                            var normalUsers = [];
+
+                            for(var i in users) {
+                                if(users[i].roles.indexOf('admin') === -1) {
+                                    normalUsers.push(users[i]);
+                                }
+                            }
+
+                            res.json(normalUsers);
+                            
+                        },
+
+                        function (err) {
+
+                            res.status(400);
+                        }
+                    );
 
             }else {
                 res.status(403);
@@ -199,7 +288,7 @@ module.exports = function(app, userModel, uuid) {
         var user = req.body;
 
         if(!isAdmin(req.user)) {
-            delete newUser.roles;
+            delete user.roles;
         }
 
 
@@ -229,14 +318,15 @@ module.exports = function(app, userModel, uuid) {
             userModel.deleteUserById(userId)
 
                 .then(
-                    function (err) {
+                    function (doc) {
 
-                        if (err) {
+                        if (doc) {
 
-                            res.status(400).send(err);
+                            res.status(200).send('Deleted');
                         }
                         else {
-                            res.status(200).send('Deleted');
+
+                            res.status(400).send(err);
                         }
                     }
                 );

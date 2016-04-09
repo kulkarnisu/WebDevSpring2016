@@ -14,9 +14,9 @@ module.exports = function(db, mongoose) {
         findUserById: findUserById,
         findAllUsers: findAllUsers,
         updateUserById: updateUserById,
-        deleteUserId: deleteUserById,
+        deleteUserById: deleteUserById,
         findUserByUsername: findUserByUsername,
-        findUserByCredentials: findUserByCredentials
+        findUserByCredentials: findUserByCredentials,
     };
     return api;
 
@@ -31,8 +31,7 @@ module.exports = function(db, mongoose) {
     }
 
     function findAllUsers() {
-
-        return mock;
+        return userModel.find({});
     }
 
     function updateUserById(userId, user) {
