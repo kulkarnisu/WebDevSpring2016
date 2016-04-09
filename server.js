@@ -8,7 +8,7 @@ var uuid          = require('node-uuid');
 var cookieParser  = require('cookie-parser');
 var session       = require('express-session');
 var mongoose      = require('mongoose');
-
+var passport      = require('passport')
 var connectionString = 'mongodb://127.0.0.1:27017/form_app';
 
 if(process.env.OPENSHIFT_MONGODB_DB_PASSWORD) {
@@ -37,6 +37,10 @@ app.use(session({
 }));
 
 app.use(cookieParser());
+
+app.use(passport.initialize());
+
+app.use(passport.session());
 
 var assignmentApp = require("./public/assignment/server/app.js")(app, db, mongoose);
 

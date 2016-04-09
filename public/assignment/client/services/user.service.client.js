@@ -12,7 +12,7 @@
     function UserService($http, $q, $rootScope) {
 
         var service = {
-            findUserByCredentials: findUserByCredentials,
+            login: login,
             findUserByUsername: findUserByUsername,
             findAllUsers: findAllUsers,
             createUser: createUser,
@@ -25,19 +25,10 @@
         };
         return service;
 
-        function findUserByCredentials(username, password) {
+        function login(user) {
 
-            var deferred = $q.defer();
+            return $http.post("/api/assignment/login", user);
 
-            var url = "/api/assignment/user?username=:username&password=:password";
-            url = url.replace(":username", username);
-            url = url.replace(":password", password);
-
-            $http.get(url).success (function (response) {
-                deferred.resolve(response);
-            });
-
-            return deferred.promise;
         }
 
         function findUserByUsername(username) {

@@ -16,7 +16,7 @@
 
         function login(user) {
 
-            UserService.findUserByCredentials(user.username, user.password).then(isUserPresent);
+            UserService.login(user).then(isUserPresent);
         }
 
         function isUserPresent(response) {
