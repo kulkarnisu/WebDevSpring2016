@@ -54,7 +54,7 @@
                     </td>
                     <td class="col-md-2">
                         <span class="glyphicon glyphicon-plus glyphicon-big hover" ng-click="model.addUser(model.user)"></span>
-                        <span class="glyphicon glyphicon-ok glyphicon-big hover"></span>
+                        <span class="glyphicon glyphicon-ok glyphicon-big hover" ng-click="model.updateUser(model.user)"></span>
                     </td>
                 </tr>
                 <tr ng-repeat="user in model.users">
@@ -75,7 +75,7 @@
                     </td>
                     <td class="col-md-2">
                         <span class="glyphicon glyphicon-remove glyphicon-big hover" ng-click="model.removeUser($index)"></span>
-                        <span class="glyphicon glyphicon-pencil glyphicon-big hover"></span>
+                        <span class="glyphicon glyphicon-pencil glyphicon-big hover" ng-click="model.selectUser($index)"></span>
                     </td>
                 </tr>
 

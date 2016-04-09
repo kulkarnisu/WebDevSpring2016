@@ -13,8 +13,12 @@
 
         vm.addUser = addUser;
         vm.removeUser = removeUser;
+        vm.selectUser = selectUser;
+        vm.updateUser = updateUser;
 
-        (function init() {
+        var oldIndex = -1;
+
+        function init() {
             
             vm.users = {};
             
@@ -29,7 +33,8 @@
                     }
                 );
 
-        })();
+        }
+        init();
         
         function addUser(user) {
 
@@ -39,15 +44,7 @@
 
                     function (response) {
 
-                        var normalUsers = [];
-
-                        for(var i in response) {
-                            if(response[i].roles.indexOf("admin") === -1) {
-                                normalUsers.push(response[i]);
-                            }
-                        }
-
-                        vm.users = normalUsers;
+                        init();
                         vm.user = {};
 
                     }
@@ -64,16 +61,40 @@
 
                     function (response) {
 
-                        return UserService.findAllUsers();
+                        init();
                     }
-                )
+                );
+        }
+
+        function selectUser($index) {
+
+            var user = vm.users[$index];
+
+            oldIndex = $index;
             
+            vm.user = {
+                _id: user._id,
+                username: user.username,
+                password: user.password,
+                firstName: user.firstName,
+                lastName: user.lastName,
+                roles: user.roles
+            }
+        }
+        
+        function updateUser(user) {
+            
+            UserService.updateUser(user._id, user)
+
                 .then(
 
-                    function (users) {
+                    function (response) {
 
-                        vm.users = users;
+                        if(response === "Updated") {
 
+                            init();
+                            vm.user = {};
+                        }
                     }
                 );
         }
