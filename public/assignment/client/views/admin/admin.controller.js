@@ -15,6 +15,9 @@
         vm.removeUser = removeUser;
         vm.selectUser = selectUser;
         vm.updateUser = updateUser;
+        vm.order = order;
+        vm.predicate='username';
+        vm.reverse = true;
 
         var oldIndex = -1;
 
@@ -51,9 +54,7 @@
                 );
         }
 
-        function removeUser($index) {
-
-            var user = vm.users[$index];
+        function removeUser(user) {
 
             UserService.deleteUserById(user._id)
 
@@ -66,11 +67,9 @@
                 );
         }
 
-        function selectUser($index) {
+        function selectUser(user) {
 
-            var user = vm.users[$index];
-
-            oldIndex = $index;
+            oldIndex = vm.users.indexOf(user);
             
             vm.user = {
                 _id: user._id,
@@ -97,6 +96,12 @@
                         }
                     }
                 );
+        }
+        
+        function order(predicate) {
+
+            vm.reverse = (vm.predicate === predicate)? !vm.reverse: false;
+            vm.predicate = predicate;
         }
     }
 })();
