@@ -48,7 +48,7 @@
 
         function addCollection(collection) {
 
-            CollectionsService.createCollectionForUser(connectionId, collection)
+            CollectionsService.createCollectionForUser(connectionId, {collection: collection})
 
                 .then(function (response) {
 
@@ -77,8 +77,8 @@
         }
 
         function deleteCollection($index) {
-            var collectionId = vm.collections[$index]._id;
-            CollectionsService.deleteCollectionById(collectionId).then(function (response) {
+            var collName = vm.collections[$index];
+            CollectionsService.deleteCollectionById(collName).then(function (response) {
                     if(response === "OK")
                         return CollectionsService.findAllCollectionsForConnection(connectionId);
                 })

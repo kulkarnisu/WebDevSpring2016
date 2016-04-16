@@ -47,7 +47,7 @@ module.exports = function(mongojs, ConnectionModel) {
 
         var deferred = q.defer();
 
-        db.createCollection(function (err, coll) {
+        db.createCollection(collection, function (err, coll) {
 
             if(err) {
                 deferred.reject(err);
@@ -65,10 +65,13 @@ module.exports = function(mongojs, ConnectionModel) {
         var deferred = q.defer();
 
         db.getCollectionNames(function (err, collections) {
+
             if(err) {
+
                 deferred.reject(err);
-                console.log(err);
+
             } else {
+
                 deferred.resolve(collections);
             }
         });
@@ -80,8 +83,26 @@ module.exports = function(mongojs, ConnectionModel) {
 
     }
 
-    function deleteCollectionById(collectionId) {
+    function deleteCollectionById(collName) {
 
+        var deferred = q.defer();
+
+        var collection = db.collection(collName);
+
+        collection.drop(function (err, doc) {
+
+            if(err) {
+
+                deferred.reject(err);
+
+            } else {
+
+                deferred.resolve(doc);
+            }
+
+        });
+
+        return deferred.promise;
     }
 
     function updateCollectionById(collectionId, newCollection) {

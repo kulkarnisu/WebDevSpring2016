@@ -38,7 +38,7 @@ module.exports = function(app, collectionModel, uuid) {
 
         var collection = req.body;
 
-        collectionModel.createCollection(collection).then(
+        collectionModel.createCollection(collection.collection).then(
 
             function (response) {
 
@@ -86,9 +86,9 @@ module.exports = function(app, collectionModel, uuid) {
 
     function deleteCollectionById(req, res) {
 
-        var collectionId = parseInt(req.params.collectionId);
+        var collName = req.params.collectionId;
 
-        collectionModel.deleteCollectionById(collectionId);
+        collectionModel.deleteCollectionById(collName);
 
         res.send(200);
     }
