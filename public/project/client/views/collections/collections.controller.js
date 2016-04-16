@@ -27,7 +27,7 @@
                     }
                 }
             );
-            
+
             toBeUpdatedIndex = -1;
         }
 
@@ -47,11 +47,19 @@
         }
 
         function addCollection(collection) {
-            var col = {name: collection.name};
-            CollectionsService.createCollectionForUser(connectionId, col).then(function (response) {
-                vm.collections.push(response);
-                vm.collection = {};
-            });
+
+            CollectionsService.createCollectionForUser(connectionId, collection)
+
+                .then(function (response) {
+
+                    return  CollectionsService.findAllCollectionsForConnection(connectionId);
+                })
+
+                .then(function(response) {
+
+                    vm.collections = response;
+                });
+            vm.collection = "";
         }
 
         function updateCollection(collection) {

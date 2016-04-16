@@ -37,16 +37,19 @@ module.exports = function(app, collectionModel, uuid) {
     function createCollection (req, res) {
 
         var collection = req.body;
-        var connId = parseInt(req.params.connId);
 
-        //console.log(collection);
+        collectionModel.createCollection(collection).then(
 
-        collection._id = parseInt(uuid.v4(), 16);
-        collection.connId =  connId;
+            function (response) {
 
-        var newCollection = collectionModel.createCollection(collection);
+                if(response) {
 
-        res.json(newCollection);
+                    res.json(200);
+                }
+
+            }
+        );
+
     }
 
     function findAllCollectionsForConnection(req, res) {
@@ -59,7 +62,7 @@ module.exports = function(app, collectionModel, uuid) {
                    res.json(collections);
                }
            }
-       )
+       );
     }
 
     function findCollectionById(req, res) {

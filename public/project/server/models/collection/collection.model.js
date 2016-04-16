@@ -45,6 +45,19 @@ module.exports = function(mongojs, ConnectionModel) {
 
     function createCollection(collection) {
 
+        var deferred = q.defer();
+
+        db.createCollection(function (err, coll) {
+
+            if(err) {
+                deferred.reject(err);
+                console.log(err);
+            } else {
+                deferred.resolve(coll);
+            }
+        });
+
+        return deferred.promise;
     }
 
     function findAllCollectionsForConnection() {
@@ -53,11 +66,10 @@ module.exports = function(mongojs, ConnectionModel) {
 
         db.getCollectionNames(function (err, collections) {
             if(err) {
-                deferred.reject();
+                deferred.reject(err);
                 console.log(err);
             } else {
                 deferred.resolve(collections);
-                console.log(collections);
             }
         });
 
