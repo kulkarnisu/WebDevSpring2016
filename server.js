@@ -46,7 +46,7 @@ app.use(passport.session());
 
 var assignmentApp = require("./public/assignment/server/app.js")(app, db, mongoose);
 
-var formApp = require("./public/project/server/app.js")(app, uuid);
+var formApp = require("./public/project/server/app.js")(app, uuid, db, mongoose);
 
 var ipaddress = process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1';
 var port = process.env.OPENSHIFT_NODEJS_PORT || 3000;
