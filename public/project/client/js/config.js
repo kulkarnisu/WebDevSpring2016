@@ -8,6 +8,10 @@
 
     function configuration($routeProvider) {
         $routeProvider
+            .when("/landing", {
+                templateUrl: "landing.html",
+                controller: "MainController",
+            })
             .when("/home", {
                 templateUrl: "client/views/home/home.view.html",
                 controller: "HomeController",
@@ -41,8 +45,8 @@
                 controllerAs: "model"
             })
             .otherwise({
-                redirectTo: "/home",
-                controller: "HomeController"
+                redirectTo: "/landing",
+                controller: "MainController"
             });
     }
 })();
