@@ -36,7 +36,7 @@
                          </tr>
                          <tr ng-repeat="doc in model.documents track by $index" >
                              <td class="tableBorder cursor">
-                                 <a href="#/data/{{doc._id}}" class="linkColor" ng-hide="edit">{{doc._id}}</a>
+                                 {{doc._id}}
                                  <div ng-jsoneditor
                                       ng-model="doc"
                                       options="{mode: 'tree'}"
