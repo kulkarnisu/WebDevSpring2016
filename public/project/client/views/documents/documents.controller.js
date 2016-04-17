@@ -19,14 +19,16 @@
         vm.selectDocument = selectDocument;
         vm.editDocument = editDocument;
 
-        var collectionId = $routeParams.id;
-        var connectionId = $routeParams.connectionId;
+        vm.edit = false;
+
+        vm.collectionId = $routeParams.id;
+        vm.connectionId = $routeParams.connectionId;
         var toBeUpdatedIndex;
 
         function init() {
             if($rootScope.loggedUser) {
                 //findAllDocumentsForCollection();
-                DocumentsService.configCollection(connectionId, collectionId).then(function(response) {
+                DocumentsService.configCollection(vm.connectionId, vm.collectionId).then(function(response) {
 
                     if(response === "OK") {
 
@@ -43,7 +45,7 @@
 
         function findAllDocumentsForCollection() {
             
-            DocumentsService.findAllDocumentsForCollection(collectionId).then(function(response) {
+            DocumentsService.findAllDocumentsForCollection(vm.collectionId).then(function(response) {
                 vm.documents = response;
             });
         }
@@ -59,9 +61,9 @@
 
         function addDocument(document) {
 
-            var doc = {name: document.name, collectionId: collectionId};
+            var doc = {name: document.name, collectionId: vm.collectionId};
 
-            DocumentsService.createDocumentForCollection(collectionId, doc).then(function (response) {
+            DocumentsService.createDocumentForCollection(vm.collectionId, doc).then(function (response) {
                 vm.documents.push(response);
                 vm.document = {};
             });
@@ -69,18 +71,17 @@
 
         function updateDocument(document) {
 
-            var doc = {name: document.name, collectionId: collectionId};
-
-            DocumentsService.updateDocumentById(parseInt(document._id), doc).then(function (response) {
+            DocumentsService.updateDocumentById(document).then(function (response) {
 
                 if (response === "OK") {
 
-                    return DocumentsService.findDocumentById(parseInt(document._id));
+                    //return DocumentsService.findDocumentById(parseInt(document._id));
+                    return DocumentsService.findAllDocumentsForCollection(vm.collectionId);
                 }
             }).then(function (response) {
 
-                vm.documents[toBeUpdatedIndex] = response;
-                vm.document = {};
+                vm.documents = response;
+                return true;
             });
         }
 
@@ -90,7 +91,7 @@
 
             DocumentsService.deleteDocumentById(documentId).then(function (response) {
                     if(response === "OK")
-                        return DocumentsService.findAllDocumentsForCollection(collectionId);
+                        return DocumentsService.findAllDocumentsForCollection(vm.collectionId);
                 })
                 .then(function (response) {
                     vm.documents = response;

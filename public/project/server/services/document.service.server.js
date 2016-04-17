@@ -63,15 +63,22 @@ module.exports = function(app, documentModel, uuid) {
     }
 
     function updateDocumentById(req, res) {
-        var documentId = parseInt(req.params.documentId);
+        var documentId = req.params.documentId;
         var document = req.body;
-        documentModel.updateDocumentById(documentId, document);
-        res.send(200);
+        /*documentModel.updateDocumentById(documentId, document);
+        res.send(200);*/
+        documentModel.updateDocumentById(documentId, document)
+            .then(function(doc) {
+                res.send(200);
+            });
     }
 
     function deleteDocumentById(req, res) {
-        var documentId = parseInt(req.params.documentId);
-        documentModel.deleteDocumentById(documentId);
-        res.send(200);
+        var documentId = req.params.documentId;
+        documentModel.deleteDocumentById(documentId)
+            .then(function(doc) {
+                res.send(200);
+            });
+        //res.send(200);
     }
 }
