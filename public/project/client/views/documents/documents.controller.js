@@ -48,6 +48,7 @@
             });
         }
 
+
         function editDocument($index) {
 
             var name = vm.documents[$index].name;
@@ -115,7 +116,7 @@
                     element.slideUp(done);
                 }
             },
-            
+
             removeClass: function(element, className, done) {
 
                 if(className === NG_HIDE_CLASS) {
