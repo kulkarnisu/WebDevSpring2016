@@ -46,10 +46,15 @@
                              </td>
                              <td class="tableBorder">
                                  <div class="floatRight">
-                                <span class="glyphicon glyphicon-pencil cursor"
-                                      aria-hidden="true" ng-click="edit = !edit"></span>&nbsp;&nbsp;
-                                <span class="glyphicon glyphicon-remove cursor"
-                                      aria-hidden="true" ng-click="model.deleteDocument($index)"></span>
+                                    <span class="glyphicon glyphicon-pencil cursor"
+                                          aria-hidden="true" ng-click="edit = !edit" ng-show="!edit"></span>
+                                     <span ng-show="!edit"> &nbsp;&nbsp;</span>
+                                     <span class="glyphicon glyphicon-ok cursor" aria-hidden="true"
+                                           ng-click="edit = !edit && model.updateDocument(model.document)"
+                                           ng-show="edit"></span>
+                                     <span ng-show="edit">&nbsp;&nbsp;</span>
+                                    <span class="glyphicon glyphicon-remove cursor"
+                                          aria-hidden="true" ng-click="model.deleteDocument($index)"></span>
                                  </div>
                              </td>
                          </tr>
