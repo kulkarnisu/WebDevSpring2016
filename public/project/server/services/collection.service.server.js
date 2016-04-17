@@ -21,7 +21,7 @@ module.exports = function(app, collectionModel, uuid) {
 
     //updates a collection object whose id is equal to the collectionId path parameter so that its properties are the same as
     //the property values of the collection object embedded in the request's body
-    app.put("/api/project/collection/:collectionId", updateCollectionById);
+    app.put("/api/project/collection/:collectionName", updateCollectionById);
 
     //removes a collection object whose id is equal to the collectionId path parameter
     app.delete("/api/project/collection/:collectionId", deleteCollectionById);
@@ -74,14 +74,20 @@ module.exports = function(app, collectionModel, uuid) {
 
     function updateCollectionById(req, res) {
 
-        var colId = parseInt(req.params.collectionId);
+        var colName = req.params.collectionName;
         var collection = req.body;
 
         //console.log(collection);
 
-        collectionModel.updateCollectionById(colId, collection);
+        /*collectionModel.updateCollectionById(colId, collection);
 
-        res.send(200);
+        res.send(200);*/
+        collectionModel.updateCollectionById(colName, collection)
+            .then(function(response) {
+                if(response) {
+                    res.send(200);
+                }
+            });
     }
 
     function deleteCollectionById(req, res) {

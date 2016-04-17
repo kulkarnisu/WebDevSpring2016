@@ -105,7 +105,20 @@ module.exports = function(mongojs, ConnectionModel) {
         return deferred.promise;
     }
 
-    function updateCollectionById(collectionId, newCollection) {
+    function updateCollectionById(colName, newCollection) {
 
+        var deferred = q.defer();
+
+        var collection = db.collection(colName);
+
+        collection.rename(newCollection.collection, {}, function(err, doc) {
+            if(err) {
+                deferred.reject(err);
+            } else {
+                deferred.resolve(doc);
+            }
+        });
+
+        return deferred.promise;
     }
 };

@@ -14,7 +14,9 @@
         vm.editCollection = editCollection;
 
         var connectionId = $routeParams.id;
+        vm.connectionId = connectionId;
         var toBeUpdatedIndex;
+        var oldCollectionName;
         init();
 
         function init() {
@@ -29,6 +31,7 @@
             );
 
             toBeUpdatedIndex = -1;
+            oldCollectionName = "";
         }
 
         function findAllCollectionsForConnection() {
@@ -39,9 +42,10 @@
         }
 
         function editCollection($index) {
-            var name = vm.collections[$index].name;
-            var _id = vm.collections[$index]._id;
-            vm.collection = {_id: _id, name: name};
+            var name = vm.collections[$index];
+            //var _id = vm.collections[$index]._id;
+            vm.collection = name;
+            oldCollectionName = name;
 
             toBeUpdatedIndex = $index;
         }
@@ -63,16 +67,16 @@
         }
 
         function updateCollection(collection) {
-            var col = {name: collection.name, connId: connectionId};
-            CollectionsService.updateCollectionById(collection._id, col).then(function (response) {
+            var col = {collection: collection};
+            CollectionsService.updateCollectionById(oldCollectionName, col).then(function (response) {
                     if (response === "OK") {
-                        return CollectionsService.findCollectionById(collection._id);
+                        return CollectionsService.findAllCollectionsForConnection(connectionId);
                     }
                 })
                 .then(function (response) {
-                    //console.log(response);
-                    vm.collections[toBeUpdatedIndex] = response;
-                    vm.collection = {};
+                    vm.collections = response;
+                    vm.collection = "";
+                    oldCollectionName = "";
                 });
         }
 

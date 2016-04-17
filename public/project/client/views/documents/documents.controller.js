@@ -5,7 +5,8 @@
 (function () {
     angular
         .module("FormBuilderApp")
-        .controller("DocumentsController", documentsController);
+        .controller("DocumentsController", documentsController)
+        .animation('.slide', slide);
 
     function documentsController($scope, $routeParams, DocumentsService, $location, $rootScope) {
 
@@ -18,12 +19,20 @@
         vm.selectDocument = selectDocument;
         vm.editDocument = editDocument;
 
-        var collectionId = parseInt($routeParams.id);
+        var collectionId = $routeParams.id;
+        var connectionId = $routeParams.connectionId;
         var toBeUpdatedIndex;
 
         function init() {
             if($rootScope.loggedUser) {
-                findAllDocumentsForCollection();
+                //findAllDocumentsForCollection();
+                DocumentsService.configCollection(connectionId, collectionId).then(function(response) {
+
+                    if(response === "OK") {
+
+                        findAllDocumentsForCollection();
+                    }
+                });
             }
             else {
                 $location.url("home");
@@ -62,11 +71,13 @@
             var doc = {name: document.name, collectionId: collectionId};
 
             DocumentsService.updateDocumentById(parseInt(document._id), doc).then(function (response) {
+
                 if (response === "OK") {
+
                     return DocumentsService.findDocumentById(parseInt(document._id));
                 }
             }).then(function (response) {
-                //console.log(response);
+
                 vm.documents[toBeUpdatedIndex] = response;
                 vm.document = {};
             });
@@ -89,5 +100,30 @@
             selectDocumentIndex = $scope.documents.indexOf(document);
             $scope.selectedDocument = document._id;
         }
+    }
+    
+    function slide() {
+
+        var NG_HIDE_CLASS = 'ng-hide';
+
+        return {
+
+            beforeAddClass: function(element, className, done) {
+
+                if(className === NG_HIDE_CLASS) {
+
+                    element.slideUp(done);
+                }
+            },
+            
+            removeClass: function(element, className, done) {
+
+                if(className === NG_HIDE_CLASS) {
+
+                    element.hide().slideDown(done);
+                }
+            }
+        }
+        
     }
 })();
