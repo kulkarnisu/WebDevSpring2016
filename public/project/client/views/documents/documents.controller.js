@@ -19,8 +19,6 @@
         vm.selectDocument = selectDocument;
         vm.editDocument = editDocument;
 
-        vm.edit = false;
-
         vm.collectionId = $routeParams.id;
         vm.connectionId = $routeParams.connectionId;
         var toBeUpdatedIndex;
@@ -44,9 +42,21 @@
         init();
 
         function findAllDocumentsForCollection() {
-            
+
             DocumentsService.findAllDocumentsForCollection(vm.collectionId).then(function(response) {
                 vm.documents = response;
+
+                vm.keys = {};
+
+                if(response[0]) {
+                    for(var k in response[0]) {
+                        if(k.indexOf('_', 0) === -1){
+                            if(k != "roles") {
+                                vm.keys[k] = "";
+                            }
+                        }
+                    }
+                }
             });
         }
 
@@ -61,9 +71,9 @@
 
         function addDocument(document) {
 
-            var doc = {name: document.name, collectionId: vm.collectionId};
+            //var doc = {name: document.name, collectionId: vm.collectionId};
 
-            DocumentsService.createDocumentForCollection(vm.collectionId, doc).then(function (response) {
+            DocumentsService.createDocumentForCollection(vm.collectionId, document).then(function (response) {
                 vm.documents.push(response);
                 vm.document = {};
             });
@@ -81,7 +91,6 @@
             }).then(function (response) {
 
                 vm.documents = response;
-                return true;
             });
         }
 
@@ -103,7 +112,7 @@
             $scope.selectedDocument = document._id;
         }
     }
-    
+
     function slide() {
 
         var NG_HIDE_CLASS = 'ng-hide';
@@ -126,6 +135,6 @@
                 }
             }
         }
-        
+
     }
 })();
