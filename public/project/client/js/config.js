@@ -9,7 +9,7 @@
     function configuration($routeProvider) {
         $routeProvider
             .when("/landing", {
-                templateUrl: "landing.html",
+                templateUrl: "application.html",
                 controller: "MainController",
             })
             .when("/home", {
@@ -45,7 +45,7 @@
                 controllerAs: "model"
             })
             .otherwise({
-                redirectTo: "/landing",
+                redirectTo: "/home",
                 controller: "MainController"
             });
     }
