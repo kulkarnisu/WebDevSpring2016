@@ -115,6 +115,54 @@ hr{
     background: snow;
 }
 
+.backColorWhite {
+    background-color: white;
+}
+
 body {
-    background-image: url("../../client/img/Mongodb-logo.jpeg");
+    background-color: #000;
+    color: #fff;
+}
+
+.navbar-inverse .navbar-brand {
+    color: #e3be5a;
+}
+
+.navbar-inverse .navbar-nav>li>a {
+    color: #e3be5a;
+}
+
+.sidebar {
+    background-color: #BFBFBF;
+}
+
+.nav-sidebar > .active > a, 
+.nav-sidebar > .active > a:hover, 
+.nav-sidebar > .active > a:focus {
+    background-color: darkred;
+}
+
+.nav>li>a {
+    color: #000;
+}
+
+.breadcrumb {
+    color: #DCDCDC;
+}
+
+table {
+    background-color: slategray;
+}
+
+thead {
+    background-color: darkslategray;
+}
+
+table a {
+    color: #fff;
+}
+
+.table-striped>tbody>tr:nth-of-type(odd)>td,
+.table-striped>tbody>tr:nth-of-type(odd)>td>a{
+    color: #000;
 }
