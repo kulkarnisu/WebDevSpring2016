@@ -47,7 +47,7 @@
 
             var deferred = $q.defer();
 
-            var url = "/api/assignment/user?username=:username";
+            var url = "/api/assignment/admin/user?username=:username";
             url = url.replace(":username", username);
 
             $http.get(url).success (function (response) {
@@ -61,7 +61,7 @@
 
             var deferred = $q.defer();
 
-            var url = "/api/assignment/user";
+            var url = "/api/assignment/admin/user";
 
             $http.get(url).success (function (response) {
                 deferred.resolve(response);
@@ -87,7 +87,7 @@
 
             var deferred = $q.defer();
 
-            var url = "/api/assignment/user";
+            var url = "/api/assignment/admin/user";
 
             $http.post(url, user).success (function (response) {
                 deferred.resolve(response);
@@ -100,7 +100,7 @@
 
             var deferred = $q.defer();
 
-            var url = "/api/assignment/user/:id";
+            var url = "/api/assignment/admin/user/:id";
             url = url.replace(":id", userID);
 
             $http.delete(url).success (function (response) {
@@ -114,7 +114,7 @@
 
             var deferred = $q.defer();
 
-            var url = "/api/assignment/user/:id";
+            var url = "/api/assignment/admin/user/:id";
             url = url.replace(":id", userID);
 
             $http.put(url, user).success (function (response) {
@@ -128,7 +128,7 @@
 
             var deferred = $q.defer();
 
-            var url = "/api/assignment/user/:id";
+            var url = "/api/assignment/admin/user/:id";
             url = url.replace(":id", userID);
 
             $http.get(url).success (function (response) {

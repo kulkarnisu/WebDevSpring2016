@@ -17,7 +17,7 @@ module.exports = function(app, userModel, uuid) {
     app.post("/api/assignment/register",  register);
 
     //Creates a new user embedded in the body of the request, and responds with an array of all users
-    app.post("/api/assignment/user", auth, createUser);
+    app.post("/api/assignment/admin/user", auth, createUser);
 
     //Return logged in user (possibly null)
     app.get("/api/assignment/user/loggedin", loggedIn);
@@ -26,18 +26,18 @@ module.exports = function(app, userModel, uuid) {
     app.post("/api/assignment/user/logout", logout);
 
     //responds with an array of all users
-    app.get("/api/assignment/user", auth,  findAllusers);
+    app.get("/api/assignment/admin/user", auth,  findAllusers);
 
     //responds with a single user whose id property is equal to the id path parameter
-    app.get("/api/assignment/user/:id", findUserById);
+    app.get("/api/assignment/admin/user/:id", findUserById);
 
     //updates an existing user whose id property is equal to the id path parameter.
     // The new properties are set to the values in the user object embedded in the HTTP request.
     // Responds with an array of all users
-    app.put("/api/assignment/user/:id", auth,  updateUserById);
+    app.put("/api/assignment/admin/user/:id", auth,  updateUserById);
 
     //removes an existing user whose id property is equal to the id path parameter. Responds with an array of all users
-    app.delete("/api/assignment/user/:id", auth, deleteUserById);
+    app.delete("/api/assignment/admin/user/:id", auth, deleteUserById);
 
     app.post  ('/api/assignment/login', passport.authenticate('local'), login);
 
@@ -291,7 +291,8 @@ module.exports = function(app, userModel, uuid) {
             delete user.roles;
         }
 
-
+        user.password = bcrypt.hashSync(user.password);
+        
         userModel.updateUserById(userId, user)
 
             .then(
@@ -388,7 +389,7 @@ module.exports = function(app, userModel, uuid) {
 
     function isAdmin(user) {
 
-        if(user.roles.indexOf("admin") > 0) {
+        if(user.roles.indexOf("admin") >= 0) {
 
             return true;
         }
