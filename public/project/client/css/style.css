@@ -22,11 +22,6 @@
     width: 80%;
 }
 
-table.tableBorder, td.tableBorder, th.tableBorder{
-    border: 1px solid lightgrey;
-    border-collapse: collapse;
-}
-
 .floatLeft{
     float: left;
 }
@@ -120,8 +115,8 @@ hr{
 }
 
 body {
-    background-color: #000;
-    color: #fff;
+    background-image: url("../../client/img/Mongo Maker.jpg");
+    color: white;
 }
 
 .navbar-inverse .navbar-brand {
@@ -139,7 +134,7 @@ body {
 .nav-sidebar > .active > a, 
 .nav-sidebar > .active > a:hover, 
 .nav-sidebar > .active > a:focus {
-    background-color: darkred;
+    background-color: royalblue;
 }
 
 .nav>li>a {
@@ -151,18 +146,29 @@ body {
 }
 
 table {
-    background-color: slategray;
+    background-color: snow;
 }
 
 thead {
-    background-color: darkslategray;
+    background-color: dimgrey;
 }
 
-table a {
-    color: #fff;
+table a, table td {
+    color: black;
 }
 
-.table-striped>tbody>tr:nth-of-type(odd)>td,
-.table-striped>tbody>tr:nth-of-type(odd)>td>a{
-    color: #000;
+.table-bordered tbody tr:hover {
+    background-color: lavender;
+}
+
+.panel-default {
+    width: 45%;
+}
+
+.panel-default-big {
+    width: 100%;
+}
+
+.panel-default-mid {
+    width: 85%;
 }

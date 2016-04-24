@@ -9,37 +9,37 @@ var LocalStrategy    = require('passport-local').Strategy;
 var bcrypt = require("bcrypt-nodejs");
 
 
-module.exports = function(app, userModel, uuid) {
+module.exports = function(app, userModel) {
 
     var auth = authorized;
 
     //Registers a new user embedded in the body of the request, and responds with an array of all users
-    app.post("/api/assignment/register",  register);
+    app.post("/api/project/register",  register);
 
     //Creates a new user embedded in the body of the request, and responds with an array of all users
-    app.post("/api/assignment/admin/user", auth, createUser);
+    app.post("/api/project/admin/user", auth, createUser);
 
     //Return logged in user (possibly null)
-    app.get("/api/assignment/user/loggedin", loggedIn);
+    app.get("/api/project/user/loggedin", loggedIn);
 
     //Logout current user
-    app.post("/api/assignment/user/logout", logout);
+    app.post("/api/project/user/logout", logout);
 
     //responds with an array of all users
-    app.get("/api/assignment/admin/user", auth,  findAllusers);
+    app.get("/api/project/admin/user", auth,  findAllusers);
 
     //responds with a single user whose id property is equal to the id path parameter
-    app.get("/api/assignment/admin/user/:id", findUserById);
+    app.get("/api/project/admin/user/:id", findUserById);
 
     //updates an existing user whose id property is equal to the id path parameter.
     // The new properties are set to the values in the user object embedded in the HTTP request.
     // Responds with an array of all users
-    app.put("/api/assignment/admin/user/:id", auth,  updateUserById);
+    app.put("/api/project/admin/user/:id", auth,  updateUserById);
 
     //removes an existing user whose id property is equal to the id path parameter. Responds with an array of all users
-    app.delete("/api/assignment/admin/user/:id", auth, deleteUserById);
+    app.delete("/api/project/admin/user/:id", auth, deleteUserById);
 
-    app.post  ('/api/assignment/login', passport.authenticate('assignment'), login);
+    app.post  ('/api/project/login', passport.authenticate('assignment'), login);
 
     passport.use('assignment', new LocalStrategy(localStrategy));
 
