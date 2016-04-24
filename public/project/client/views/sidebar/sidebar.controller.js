@@ -1,6 +1,5 @@
-/**
- * Created by TanmayPC on 2/19/2016.
- */
+"use strict";
+
 (function(){
     angular
         .module("FormBuilderApp")
@@ -10,8 +9,8 @@
         $scope.navAdmin = navAdmin;
 
         function navAdmin() {
-            if($rootScope.loggedUser) {
-                if($rootScope.loggedUser.roles.indexOf('admin') > -1) {
+            if($rootScope.currentUser) {
+                if($rootScope.currentUser.roles.indexOf('admin') > -1) {
                     return false;
                 }
             }

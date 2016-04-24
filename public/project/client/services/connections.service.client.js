@@ -18,7 +18,9 @@
 
             updateConnectionById: updateConnectionById,
 
-            findConnectionById: findConnectionById
+            findConnectionById: findConnectionById,
+
+            shareConnection: shareConnection
         };
         return api;
 
@@ -83,6 +85,7 @@
 
             return deferred.promise;
         }
+        
         function findConnectionById(connectionID) {
 
             var deferred = $q.defer();
@@ -97,6 +100,22 @@
 
             return deferred.promise;
 
+        }
+        
+        function shareConnection(connection, userID) {
+
+            var deferred = $q.defer();
+
+            var url = "/api/project/share/connection/user/:userId";
+
+            url = url.replace(":userId", userID);
+
+            $http.post(url, connection).success(function (response) {
+
+                deferred.resolve(response);
+            });
+
+            return deferred.promise;
         }
 
     }

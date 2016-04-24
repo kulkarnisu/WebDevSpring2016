@@ -25,10 +25,12 @@ module.exports = function(app, connectionModel) {
     //removes a connection object whose id is equal to the connectionId path parameter
     app.delete("/api/project/connection/:connectionId", deleteConnectionById);
 
+    app.post("/api/project/share/connection/user/:userId", shareConnection);
+
     function createConnection (req, res) {
 
         var connection = req.body;
-        var userId = parseInt(req.params.userId);
+        var userId = req.params.userId;
 
         connection.userId = userId;
 
@@ -50,9 +52,8 @@ module.exports = function(app, connectionModel) {
 
     function findAllConnectionsForUser(req, res) {
 
-        var userId = parseInt(req.params.userId);
+        var userId = req.params.userId;
 
-        /*res.json(connectionModel.findAllConnectionsForUser(userId));*/
         connectionModel.findAllConnectionsForUser(userId)
             .then(function(doc) {
                 if(doc) {
@@ -68,7 +69,7 @@ module.exports = function(app, connectionModel) {
 
     function findConnectionById(req, res) {
 
-        var connectionId = parseInt(req.params.connectionId);
+        var connectionId = req.params.connectionId;
 
         res.json(connectionModel.findConnectionById(connectionId));
     }
@@ -97,6 +98,22 @@ module.exports = function(app, connectionModel) {
                     res.send(200);
                 }
             });
+    }
+    
+    function shareConnection(req, res) {
+
+        var userId = req.params.userId;
+        var conn = req.body;
+
+        conn.userId.push(userId);
+
+        connectionModel.updateConnectionById(conn._id, conn)
+            .then(function(doc) {
+                if(doc) {
+                    res.send(200);
+                }
+            });
+        
     }
     
 }

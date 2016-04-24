@@ -34,6 +34,14 @@
                     checkLoggedIn: checkLoggedIn
                 }
             })
+            .when("/share", {
+                templateUrl: "client/views/users/share-connection.view.html",
+                controller: "ShareController",
+                controllerAs: "model",
+                resolve: {
+                    checkLoggedIn: checkLoggedIn
+                }
+            })
             .when("/collections/:id", {
                 templateUrl: "client/views/collections/collections.view.html",
                 controller: "CollectionsController",
