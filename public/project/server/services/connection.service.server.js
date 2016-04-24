@@ -27,6 +27,8 @@ module.exports = function(app, connectionModel) {
 
     app.post("/api/project/share/connection/user/:userId", shareConnection);
 
+    app.post("/api/project/remove/connection/user/:userId", removeSharedConnection);
+
     function createConnection (req, res) {
 
         var connection = req.body;
@@ -114,6 +116,19 @@ module.exports = function(app, connectionModel) {
                 }
             });
         
+    }
+
+    function removeSharedConnection(req, res) {
+        var userId = req.params.userId;
+        var connection = req.body;
+        connection.userId.splice(connection.userId.indexOf(userId), 1);
+
+        connectionModel.updateConnectionById(connection._id, connection)
+            .then(function(doc) {
+                if(doc) {
+                    res.send(200);
+                }
+            });
     }
     
 }

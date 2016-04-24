@@ -9,9 +9,22 @@
         .module("FormBuilderApp")
         .controller("ShareController", shareController);
 
-    function shareController($scope, $rootScope, $location) {
+    function shareController(UserService, ConnectionsService, $rootScope, $location) {
+
         var vm = this;
 
+        function init() {
+
+            ConnectionsService.findAllConnectionsForUser($rootScope.currentUser._id).then(function(response) {
+
+                vm.connections = response;
+
+                vm.$location = $location;
+
+            });
+
+        }
+        init();
 
     }
 })();
