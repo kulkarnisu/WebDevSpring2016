@@ -176,3 +176,15 @@ table a, table td {
 .list-group-item {
     color: #000;
 }
+
+.glyphicon-color {
+    color: black;
+}
+
+.padding-right {
+    padding-right: 15px;
+}
+
+.pad-top{
+    padding-top: 7px;
+}

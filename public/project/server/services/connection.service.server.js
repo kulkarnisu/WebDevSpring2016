@@ -121,14 +121,21 @@ module.exports = function(app, connectionModel) {
     function removeSharedConnection(req, res) {
         var userId = req.params.userId;
         var connection = req.body;
-        connection.userId.splice(connection.userId.indexOf(userId), 1);
 
-        connectionModel.updateConnectionById(connection._id, connection)
-            .then(function(doc) {
-                if(doc) {
-                    res.send(200);
-                }
-            });
+        if(connection.userId.length > 1 && !(userId == req.user._id)) {
+
+            connection.userId.splice(connection.userId.indexOf(userId), 1);
+
+            connectionModel.updateConnectionById(connection._id, connection)
+                .then(function (doc) {
+                    if (doc) {
+                        res.send(200);
+                    }
+                });
+        }
+        else {
+            res.send(400);
+        }
     }
     
 }
