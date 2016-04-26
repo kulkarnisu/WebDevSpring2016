@@ -89,6 +89,8 @@
 
             var url = "/api/project/admin/user";
 
+            user.type = "project";
+
             $http.post(url, user).success (function (response) {
                 deferred.resolve(response);
             });

@@ -45,9 +45,14 @@ app.use(passport.initialize());
 
 app.use(passport.session());
 
-//var assignmentApp = require("./public/assignment/server/app.js")(app, db, mongoose);
+var assignmentUserModel = require("./public/assignment/server/models/user/user.model.js")(db, mongoose);
+var projectUserModel = require("./public/project/server/models/user/user.model.js")(db, mongoose);
 
-var projectApp = require("./public/project/server/app.js")(app, db, mongoose, mongojs);
+var assignmentApp = require("./public/assignment/server/app.js")(app, db, mongoose, assignmentUserModel);
+
+var projectApp = require("./public/project/server/app.js")(app, db, mongoose, mongojs, projectUserModel);
+
+var securityApp = require("./public/security/security.js")(app, assignmentUserModel, projectUserModel);
 
 var ipaddress = process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1';
 var port = process.env.OPENSHIFT_NODEJS_PORT || 3000;

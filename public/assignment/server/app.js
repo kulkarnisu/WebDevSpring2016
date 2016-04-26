@@ -1,9 +1,7 @@
 /**
  * Created by sudeep on 2/19/16.
  */
-module.exports = function(app, db, mongoose) {
-
-    var assignemntUserModel = require("./models/user/user.model.js")(db, mongoose);
+module.exports = function(app, db, mongoose, assignemntUserModel) {
 
     var formModel = require("./models/form/form.model.js")(db, mongoose);
 

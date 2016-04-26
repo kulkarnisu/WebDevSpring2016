@@ -76,6 +76,8 @@
 
             var url = "/api/assignment/register";
 
+            user.type = "assignment";
+
             $http.post(url, user).success (function (response) {
                 deferred.resolve(response);
             });
@@ -88,6 +90,8 @@
             var deferred = $q.defer();
 
             var url = "/api/assignment/admin/user";
+
+            user.type = "assignment";
 
             $http.post(url, user).success (function (response) {
                 deferred.resolve(response);
