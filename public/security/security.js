@@ -29,6 +29,7 @@ module.exports = function(app, assignmentUserModel, projectUserModel) {
     app.post  ('/api/project/user/logout',   logout);
     app.get   ('/api/project/user/loggedin', projectLoggedin);
     app.post  ('/api/project/register', register);
+    app.get  ('/api/project/admin/user', auth, findAllProjectUsers)
 
     function assignmentLocalStrategy(username, password, done) {
         assignmentUserModel
@@ -406,5 +407,24 @@ module.exports = function(app, assignmentUserModel, projectUserModel) {
         }
 
         return false;
+    }
+
+    function findAllProjectUsers(req, res) {
+
+        if(isAdmin(req.user)) {
+            projectUserModel.findAllUsers()
+                .then(
+                    function (users) {
+                        res.json(users);
+                    },
+                    function (err) {
+                        res.status(400);
+                    }
+                );
+
+        }else {
+            res.status(403);
+        }
+
     }
 }
